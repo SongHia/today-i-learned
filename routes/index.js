@@ -51,10 +51,10 @@ router.post('/api/create', function(req, res){
     tilID: req.body.tilID,
     til: req.body.til,
     context: req.body.context,
-    tags: req.body.tags,
+    tags: req.body.tags.split(','),
     bestPartDay: req.body.bestPartDay,
     pageURL: req.body.pageURL,
-    dateAdded: { type: Date, default: Date.now}
+    // dateAdded: { type: Date, default: Date.now}
   }
 
   var record = new Record(recordObj);
@@ -82,7 +82,7 @@ router.post('/api/create', function(req, res){
 //get api
 router.get('/api/get', function(req,res){
 
-  Person.find(function(err,data){
+  Record.find(function(err,data){
 
       if(err){
         var error = {
