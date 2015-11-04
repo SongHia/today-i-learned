@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spot</title>
+    <title>The More You Know</title>
 
     <!-- Custom Font - Change 'Muli' to the font you want -->
     <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
@@ -29,20 +29,28 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <h1>Sign Up for Spot</h1>
-        <form method="post" action="/api/create/person">
+        <h1>The More You Know</h1>
+        <form method="post" action="/api/create">
           <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Add your name" name="name">
+            <label for="name">TIL</label>
+            <input type="text" class="form-control" id="til" placeholder="I learned that..." name="til">
           </div>
           <div class="form-group">
-            <label for="itpYear">Phone Number</label>
-            <input type="text" class="form-control" id="itpYear" placeholder="Add your phone number" name="itpYear">
+            <label for="itpYear">The Context</label>
+            <input type="text" class="form-control" id="context" placeholder="The context for this was..." name="context">
           </div>
           <div class="form-group">
-            <label for="imageUrl">ImageURL</label>
-            <input type="text" class="form-control" id="imageUrl" placeholder="Add Image Url" name="imageUrl">
-          </div>                    
+            <label for="imageUrl">Tags</label>
+            <input type="text" class="form-control" id="tags" placeholder="Add a few tags separated by comma" name="tags">
+          </div>
+          <div class="form-group">
+            <label for="imageUrl">Best Party Of The Day</label>
+            <input type="text" class="form-control" id="bestPartDay" placeholder="The best part of my day was..." name="bestPartDay">
+          </div>  
+          <div class="form-group">
+            <label for="imageUrl">Best Link Of The Day</label>
+            <input type="text" class="form-control" id="pageURL" placeholder="Add a url here including the 'http' " name="pageURL">
+          </div>         
           <button type="submit" class="btn btn-default">Submit</button>
         </form> 
       </div>
