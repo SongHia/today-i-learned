@@ -1,3 +1,17 @@
+// http://localhost:3000/api/get
+// (GET route)
+// http://localhost:3000/api/get/:id
+// (GET route - copy and paste the id in place of :id... you can see the id in the response of http://localhost:3000/api/get)
+// http://localhost:3000/api/delete/:id
+// (GET route - copy and paste the id in place of :id... you can see the id in the response of http://localhost:3000/api/get)
+// http://localhost:3000/api/update/:id
+// (POST route - use POSTMAN)
+// http://localhost:3000/api/create
+// (POST route - use POSTMAN)
+
+
+
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
@@ -101,6 +115,30 @@ router.get('/api/get', function(req,res){
 
   })
 
+})
+
+router.get('/api/get/:id', function(req, res){
+
+  var requestedId = req.param('id');
+
+  // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model.findById
+  Record.findById(requestedId, function(err,data){
+
+    // if err or no user found, respond with error 
+    if(err || data == null){
+      var error = {status:'ERROR', message: 'Could not find that record'};
+       return res.json(error);
+    }
+
+    // otherwise respond with JSON data of the animal
+    var jsonData = {
+      status: 'OK',
+      record: data
+    }
+
+    return res.json(jsonData);
+  
+  })
 })
 
 module.exports = router;
