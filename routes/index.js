@@ -33,7 +33,7 @@ router.get('/', function(req, res) {
   console.log('home page requested!');
 
   var jsonData = {
-  	'name': 'song-the-more-you-know',
+  	'name': 'today-i-learned',
   	'api-status':'OK'
   }
   // respond with json data
@@ -69,8 +69,8 @@ router.post('/api/create', function(req, res){
     til: req.body.til,
     context: req.body.context,
     tags: req.body.tags.split(','),
-    bestPartDay: req.body.bestPartDay,
-    pageURL: req.body.pageURL,
+    bestPartDay: req.body.bestPartDay
+    // pageURL: req.body.pageURL,
     // dateAdded: { type: Date, default: Date.now}
   }
 
@@ -217,11 +217,11 @@ router.post('/api/update/:id', function(req, res){
     // add to object that holds updated data
     dataToUpdate['bestPartDay'] = bestPartDay;
     }
-    if(req.body.pageURL) {
-      pageURL = req.body.pageURL;
-      // add to object that holds updated data
-      dataToUpdate['pageURL'] = pageURL;
-    }    
+    // if(req.body.pageURL) {
+    //   pageURL = req.body.pageURL;
+    //   // add to object that holds updated data
+    //   dataToUpdate['pageURL'] = pageURL;
+    // }    
 
     console.log('the data to update is ' + JSON.stringify(dataToUpdate));
 
