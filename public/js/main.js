@@ -18,6 +18,7 @@ function renderRecord(){
 					// '<img src='+record[i].imageUrl+' width="100">'+
 					'<h1>'+record[i].til+'</h1>'+
 					'<ul>'+
+						'<li>ID: '+record[i].id+'</li>'+
 						'<li>Context: '+record[i].context+'</li>'+
 						'<li>Tags: '+record[i].tags+'</li>'+
 						'<li>Best Part Of The Day: '+record[i].bestPartDay+'</li>'+

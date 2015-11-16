@@ -44,7 +44,7 @@ router.get('/', function(req, res) {
   	'name': 'today-i-learned',
   	'api-status':'OK',
     'instructions': 'text 917-746-4128 with your lesson of the day',
-    'format': 'Rain is wet, This morning it was gross outside, Having ice'
+    'format': 'Rain is wet, This morning it was gross outside, tag1. tag2. tag3, Having ice cream'
   }
   // respond with json data
   res.json(jsonData)
