@@ -12,6 +12,9 @@
 
 //https://github.com/sslover/designing-for-data-personalization/blob/master/week8/mongoose-cheatsheet.md
 
+// https://songhitp-today-i-learned.herokuapp.com/add-til
+// https://songhitp-today-i-learned.herokuapp.com/directory
+// https://songhitp-today-i-learned.herokuapp.com/twilio-callback
 
 
 
@@ -21,6 +24,11 @@ var mongoose = require('mongoose');
 
 // our db model
 var Record = require("../models/record.js");
+
+
+//Twilio 
+var twilio = require('twilio');
+
 
 /**
  * GET '/'
@@ -246,6 +254,59 @@ router.post('/api/update/:id', function(req, res){
       return res.json(jsonData);
 
     })
+
+})
+
+
+// this route gets called whenever Twilio receives a message
+router.post('/twilio-callback', function(req,res){
+
+  // there's lots contained in the body
+  console.log(req.body);
+  // the actual message is contained in req.body.Body
+  var incomingMsg = req.body.Body;
+
+  //incoming messages look like:
+  // Rain is wet, i was rained on, *omit [tags,tags], eating ice cream
+
+  //msg Array --> [Rain is wet, i was rained on, eating ice cream]
+  var msgArray = incomingMsg.split(',');
+  var til = msgArray[0];
+  var context = msgArray[1];
+  var bestPartDay = msgArray[2];
+
+  //now let's save to our database
+  var recordObj = {
+    // tilID: req.body.tilID,
+    til: til,
+    context: context,
+    // tags: req.body.tags.split(','),
+    bestPartDay: bestPartDay
+    // pageURL: req.body.pageURL,
+    // dateAdded: { type: Date, default: Date.now}
+  }
+
+  var record = new Record(recordObj)
+
+  record.save(function(err,data){
+    // set up the twilio response
+    var twilioResp = new twilio.TwimlResponse();
+    if(err){
+      // respond to user
+      twilioResp.sms('Oops! We couldn\'t save your lesson! --> ' + incomingMsg);
+      // respond to twilio
+      res.set('Content-Type', 'text/xml');
+      res.send(twilioResp.toString());      
+    }
+    else {
+      // respond to user
+      twilioResp.sms('Successfully saved your lesson! --> ' + incomingMsg);
+      // respond to twilio
+      res.set('Content-Type', 'text/xml');
+      res.send(twilioResp.toString());     
+    }
+  })
+
 
 })
 
