@@ -44,7 +44,7 @@ router.get('/', function(req, res) {
   	'name': 'today-i-learned',
   	'api-status':'OK',
     'instructions': 'text 917-746-4128 with your lesson of the day',
-    'format': 'Rain is wet, This morning it was gross outside, Having ice cream'
+    'format': 'Rain is wet, This morning it was gross outside, Having ice'
   }
   // respond with json data
   res.json(jsonData)
@@ -81,7 +81,7 @@ router.post('/api/create', function(req, res){
     tags: req.body.tags.split(','),
     bestPartDay: req.body.bestPartDay
     // pageURL: req.body.pageURL,
-    // dateAdded: { type: Date, default: Date.now}
+    dateAdded: { type: Date, default: Date.now}
   }
 
   var record = new Record(recordObj);
@@ -285,7 +285,7 @@ router.post('/twilio-callback', function(req,res){
     // tags: req.body.tags.split(','),
     bestPartDay: bestPartDay
     // pageURL: req.body.pageURL,
-    // dateAdded: { type: Date, default: Date.now}
+    dateAdded: { type: Date, default: Date.now}
   }
 
   var record = new Record(recordObj)

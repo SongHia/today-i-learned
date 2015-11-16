@@ -21,6 +21,7 @@ function renderRecord(){
 						'<li>Context: '+record[i].context+'</li>'+
 						'<li>Tags: '+record[i].tags+'</li>'+
 						'<li>Best Part Of The Day: '+record[i].bestPartDay+'</li>'+
+						'<li>Date Added: '+record[i].dateAdded+'</li>'+
 						// '<li>Best Link: '+record[i].pageURL+'</li>'+
 					'</ul>'+
 					'<a href="/edit/'+record[i]._id+'">Edit Record</a>'+
