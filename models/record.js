@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 // See http://mongoosejs.com/docs/schematypes.html
 
 var recordSchema = new Schema({
-	//tilID: Number,
 	til: String,
 	context: String,
 	tags: [String],

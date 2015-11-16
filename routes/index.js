@@ -75,13 +75,11 @@ router.post('/api/create', function(req, res){
   console.log(req.body);
   
   var recordObj = {
-    // tilID: req.body.tilID,
     til: req.body.til,
     context: req.body.context,
     tags: req.body.tags.split(','),
     bestPartDay: req.body.bestPartDay
     // pageURL: req.body.pageURL,
-    // dateAdded: { type: Date, default: Date.now}
   }
 
   var record = new Record(recordObj);
@@ -271,21 +269,22 @@ router.post('/twilio-callback', function(req,res){
   //incoming messages look like:
   // Rain is wet, i was rained on, *omit [tags,tags], eating ice cream
 
-  //msg Array --> [Rain is wet, i was rained on, eating ice cream]
+
   var msgArray = incomingMsg.split(',');
+  //msg Array --> [Rain is wet, i was rained on, life lessons. weather. facts, eating ice cream]
   var til = msgArray[0];
   var context = msgArray[1];
-  var bestPartDay = msgArray[2];
+  var tags = msgArray[2].split('.');
+  var bestPartDay = msgArray[3];
 
   //now let's save to our database
   var recordObj = {
-    // tilID: req.body.tilID,
     til: til,
     context: context,
     // tags: req.body.tags.split(','),
+    tags: tags,
     bestPartDay: bestPartDay
     // pageURL: req.body.pageURL,
-    // dateAdded: { type: Date, default: Date.now}
   }
 
   var record = new Record(recordObj)
