@@ -285,7 +285,7 @@ router.post('/twilio-callback', function(req,res){
     // tags: req.body.tags.split(','),
     bestPartDay: bestPartDay
     // pageURL: req.body.pageURL,
-    dateAdded: { type: Date, default: Date.now}
+    // dateAdded: { type: Date, default: Date.now}
   }
 
   var record = new Record(recordObj)
