@@ -44,7 +44,7 @@ router.get('/', function(req, res) {
   	'name': 'today-i-learned',
   	'api-status':'OK',
     'instructions': 'text 917-746-4128 with your lesson of the day',
-    'format': 'Rain is wet, This morning it was gross outside, tag1. tag2. tag3, Having ice cream'
+    'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
   }
   // respond with json data
   res.json(jsonData)
@@ -267,23 +267,24 @@ router.post('/twilio-callback', function(req,res){
   var incomingMsg = req.body.Body;
 
   //incoming messages look like:
-  // Rain is wet, i was rained on, *omit [tags,tags], eating ice cream
+  //'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
 
 
   var msgArray = incomingMsg.split(',');
-  //msg Array --> [Rain is wet, i was rained on, life lessons. weather. facts, eating ice cream]
+  //msg Array --> [Rain is wet, This morning it was gross outside, Having ice cream, tag1.tag2.tag3]
   var til = msgArray[0];
   var context = msgArray[1];
-  var tags = msgArray[2].split('.');
-  var bestPartDay = msgArray[3];
+  var bestPartDay = msgArray[2];
+  var tags = msgArray[3].split('.');
+
 
   //now let's save to our database
   var recordObj = {
     til: til,
     context: context,
     // tags: req.body.tags.split(','),
-    tags: tags,
-    bestPartDay: bestPartDay
+    bestPartDay: bestPartDay,
+    tags: tags
     // pageURL: req.body.pageURL,
   }
 
