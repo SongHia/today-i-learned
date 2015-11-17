@@ -29,24 +29,26 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <h1>The More You Know</h1>
+        <div class="main">
+          <h1>Today I Learned</h1>
+        </div>
         <form method="post" action="/api/create">
           <div class="form-group">
             <label for="name">TIL</label>
-            <input type="text" class="form-control" id="til" placeholder="I learned that..." name="til">
+            <input type="text" class="form-control" id="til" placeholder="I learned that..." name="til" required>
           </div>
           <div class="form-group">
             <label for="itpYear">The Context</label>
-            <input type="text" class="form-control" id="context" placeholder="The context for this was..." name="context">
-          </div>
-          <div class="form-group">
-            <label for="imageUrl">Tags</label>
-            <input type="text" class="form-control" id="tags" placeholder="Add a few tags separated by comma" name="tags">
+            <input type="text" class="form-control" id="context" placeholder="The context for this was..." name="context" required>
           </div>
           <div class="form-group">
             <label for="imageUrl">Best Part Of The Day</label>
-            <input type="text" class="form-control" id="bestPartDay" placeholder="The best part of my day was..." name="bestPartDay">
+            <input type="text" class="form-control" id="bestPartDay" placeholder="The best part of my day was..." name="bestPartDay" required>
           </div>  
+          <div class="form-group">
+            <label for="imageUrl">Tags</label>
+            <input type="text" class="form-control" id="tags" placeholder="Add a few tags separated by comma" name="tags" required>
+          </div>
 <!--           <div class="form-group">
             <label for="imageUrl">Best Link Of The Day</label>
             <input type="text" class="form-control" id="pageURL" placeholder="Add a url here including the 'http' " name="pageURL">
@@ -57,10 +59,37 @@
     </div>
   </div>
   
-</body>
+ <div id="footer">
+      <div class="container">
+        <p>&copy; <a href="http://songhia.com">Zero Co. 2015</a></p>
+      </div>
+  </div>
 
-    <!-- JQuery script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+  </body>
+
+    <!-- JQuery script
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+    <!-- JQuery validate -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+      $("form").validate({
+          // rules: {
+          //   editWeight: {
+          //     required: true,
+          //     number: true // must be a number
+          //   },
+          //   weight: {
+          //     required: true,
+          //     number: true // must be a number
+          //   }
+          // }
+      }); 
+    </script>    
 
     <!-- CUSTOM JS -->
     <script src="js/main.js"></script>
