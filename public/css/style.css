@@ -1,6 +1,15 @@
 /**************/
 /* Custom CSS */
 /**************/
+
+@font-face {
+    font-family: 'Cooper Hewitt';
+    src: url('fonts/CooperHewitt-Medium.otf') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
   background: #4ECDC4;
   color: #fff;
