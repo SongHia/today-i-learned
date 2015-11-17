@@ -12,6 +12,37 @@ label {
 
 }
 
+a {
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 15px;
+    padding:12px;
+}
+
+a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.header{
+      background-color: #4ECDC4;
+}
+
+.nav li {
+/*  color: #fff;*/
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-block;
+  margin:0 10px 0 10px;
+  text-transform: uppercase;
+}
+
 .main {
   background-color: #fff;
   margin: 0 auto;
@@ -34,7 +65,7 @@ label {
   background: #0F7ADA;
 }
 
-#footer {
+.footer {
   background-color: #fff;
   color: #0F7ADA;
   padding: 5px;
@@ -43,13 +74,13 @@ label {
   width: 100%;
 }
 
-#footer p {
+.footer p {
   text-transform: uppercase;
   font-size: 15px;
   color: #fff;
   font-family: 'Cooper Hewitt Heavy', sans-serif;
 }
 
-#footer a {
-	text-decoration: none;
+.footer a {
+  color: #4ECDC4;
 }

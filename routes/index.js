@@ -94,6 +94,7 @@ router.post('/api/create', function(req, res){
         message: err
       }
       return res.json(err)
+
     }
 
     var jsonData = {
@@ -102,10 +103,10 @@ router.post('/api/create', function(req, res){
     }
 
     return res.json(jsonData);
-    // return res.render('directory.html')
-
+  
+   
   })
-
+ // res.render('directory.html')
 })
 
 //get api
