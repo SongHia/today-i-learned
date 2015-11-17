@@ -1,14 +1,9 @@
-// CUSTOM JS FILE //
-//seems to have worked to convert date http://stackoverflow.com/questions/8675642/how-can-i-format-a-date-coming-from-mongodb
-//get weird js console: Rangy warning: DEPRECATED: createCssClassApplier in module ClassApplier is deprecated. Please use createClassApplier instead.
-
 function init() {
   renderRecord();
 }
 
-
 // edit form button event
-// when the form is submitted (with a new animal edit), the below runs
+// when the form is submitted (with a new record edit), the below runs
 jQuery("#editForm").submit(function(e){
 
 	// first, let's pull out all the values
@@ -37,7 +32,7 @@ jQuery("#editForm").submit(function(e){
   		if(response.status=="OK"){
 	  		// success
 	  		console.log(response);
-	  		// re-render the map
+	  		// re-render the records
 	  		renderRecord();
 	  		// now, close the modal
 	  		$('#editModal').modal('hide')
@@ -45,12 +40,12 @@ jQuery("#editForm").submit(function(e){
 	  		jQuery("#editForm input").val('');
   		}
   		else {
-  			alert("something went wrong");
+  			alert("something went wrong with edit 1");
   		}
   	},
   	error : function(err){
   		// do error checking
-  		alert("something went wrong");
+  		alert("something went wrong with edit 2");
   		console.error(err);
   	}
   }); 
@@ -62,7 +57,7 @@ jQuery("#editForm").submit(function(e){
 
 
 // get Record JSON from /api/get
-function renderRecord(){
+function renderRecord(record){
 	// first, make sure the #record-holder is empty
 	jQuery('#record-holder').empty();
 
@@ -101,11 +96,12 @@ function renderRecord(){
 	})	
 }
 
+
 jQuery('#editModal').on('show.bs.modal', function (e) {
   // let's get access to what we just clicked on
   var clickedButton = e.relatedTarget;
   // now let's get its parent
-	var parent = jQuery(clickedButton).parent();
+  var parent = jQuery(clickedButton).parent();
 
   // now, let's get the values of the records that we're wanting to edit
   // we do this by targeting specific spans within the parent and pulling out the text
@@ -123,6 +119,7 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
 	jQuery("#edit-id").val(id);
 
 })
+
 
 function deleteRecord(event){
 	var targetedId = event.target.id;

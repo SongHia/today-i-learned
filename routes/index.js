@@ -40,16 +40,16 @@ router.get('/', function(req, res) {
 
   console.log('home page requested!');
 
-  // var jsonData = {
-  // 	'name': 'today-i-learned',
-  // 	'api-status':'OK',
-  //   'instructions': 'text 917-746-4128 with your lesson of the day',
-  //   'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
-  // }
-  // // respond with json data
-  // res.json(jsonData)
+  var jsonData = {
+  	'name': 'today-i-learned',
+  	'api-status':'OK',
+    'instructions': 'text 917-746-4128 with your lesson of the day',
+    'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
+  }
+  // respond with json data
+  res.json(jsonData)
 
-  res.render('directory.html')
+  // res.render('directory.html')
 
 });
 
@@ -204,7 +204,7 @@ router.post('/api/update/:id', function(req, res){
    var dataToUpdate = {}; // a blank object of data to update
 
     // pull out the information from the req.body and add it to the object to update
-    var til, context, tags, bestPartDay, pageURL; 
+    var til, context, bestPartDay, tags; 
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
@@ -218,16 +218,16 @@ router.post('/api/update/:id', function(req, res){
       // add to object that holds updated data
       dataToUpdate['context'] = context;
     }
+    if(req.body.bestPartDay) {
+    bestPartDay = req.body.bestPartDay;
+    // add to object that holds updated data
+    dataToUpdate['bestPartDay'] = bestPartDay;
+    }
     var tags = []; // blank array to hold tags
     if(req.body.tags){
       tags = req.body.tags.split(","); // split string into array
       // add to object that holds updated data
       dataToUpdate['tags'] = tags;
-    }
-    if(req.body.bestPartDay) {
-    bestPartDay = req.body.bestPartDay;
-    // add to object that holds updated data
-    dataToUpdate['bestPartDay'] = bestPartDay;
     }
     // if(req.body.pageURL) {
     //   pageURL = req.body.pageURL;
@@ -237,7 +237,7 @@ router.post('/api/update/:id', function(req, res){
 
     console.log('the data to update is ' + JSON.stringify(dataToUpdate));
 
-    // now, update that animal
+    // now, update that record
     // mongoose method findByIdAndUpdate, see http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate  
     Record.findByIdAndUpdate(requestedId, dataToUpdate, function(err,data){
       // if err saving, respond back with error
