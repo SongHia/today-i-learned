@@ -2,14 +2,6 @@
 /* Custom CSS */
 /**************/
 
-@font-face {
-    font-family: 'Cooper Hewitt';
-    src: url('fonts/CooperHewitt-Medium.otf') format('embedded-opentype');
-/*    font-weight: normal;
-    font-style: normal;*/
-}
-
-
 body {
   background: #4ECDC4;
   color: #fff;
@@ -60,13 +52,13 @@ a:hover {
 }
 
 .main h1 {
-	font-family: 'Cooper Hewitt', sans-serif;
+	font-family: 'Cooper Hewitt', 'Montserrat', sans-serif;
   color: #4ECDC4;
   text-transform: uppercase;
 }
 
 .modal-header h4{
-  font-family: 'Cooper Hewitt', sans-serif;
+  font-family: 'Cooper Hewitt', 'Montserrat', sans-serif;
   color: #0F7ADA;
 }
 
@@ -87,7 +79,7 @@ a:hover {
   text-transform: uppercase;
   font-size: 15px;
   color: #fff;
-  font-family: 'Cooper Hewitt Heavy', sans-serif;
+  font-family: 'Cooper Hewitt', 'Montserrat', sans-serif;
 }
 
 .footer a {
