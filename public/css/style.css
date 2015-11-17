@@ -5,8 +5,8 @@
 @font-face {
     font-family: 'Cooper Hewitt';
     src: url('fonts/CooperHewitt-Medium.otf') format('embedded-opentype');
-    font-weight: normal;
-    font-style: normal;
+/*    font-weight: normal;
+    font-style: normal;*/
 }
 
 
@@ -78,7 +78,7 @@ a:hover {
   background-color: #fff;
   color: #0F7ADA;
   padding: 5px;
-  position: absolute;
+  position: fixed;
   bottom:0;
   width: 100%;
 }

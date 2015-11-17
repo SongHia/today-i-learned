@@ -81,7 +81,7 @@ function renderRecord(){
 						'<li>Context: '+record[i].context+'</li>'+
 						'<li>Best Part Of The Day: '+record[i].bestPartDay+'</li>'+
 						'<li>Tags: '+record[i].tags+'</li>'+
-						'<li>ID: '+record[i]._id+'</li>'+
+						// '<li>ID: '+record[i]._id+'</li>'+
 						// '<li>Date Added: '+date.toDateString()+'</li>'+
 						// '<li>Best Link: '+record[i].pageURL+'</li>'+
 					'</ul>'+
