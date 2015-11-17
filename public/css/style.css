@@ -7,14 +7,36 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-.main h1 {
-	font-family: 'Cooper Hewitt', sans-serif;
+label {
+  color: #fff;
+
 }
 
+.main {
+  background-color: #fff;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+.main h1 {
+	font-family: 'Cooper Hewitt', sans-serif;
+  color: #4ECDC4;
+  text-transform: uppercase;
+}
+
+.modal-header h4{
+  font-family: 'Cooper Hewitt', sans-serif;
+  color: #0F7ADA;
+}
+
+.modal-body {
+  background: #0F7ADA;
+}
 
 #footer {
   background-color: #fff;
-  color: #fff;
+  color: #0F7ADA;
   padding: 5px;
   position: absolute;
   bottom:0;
@@ -25,7 +47,7 @@ body {
   text-transform: uppercase;
   font-size: 15px;
   color: #fff;
-  font-family: 'Cooper Hewitt Bold', sans-serif;
+  font-family: 'Cooper Hewitt Heavy', sans-serif;
 }
 
 #footer a {
