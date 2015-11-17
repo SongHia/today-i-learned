@@ -25,7 +25,7 @@ jQuery("#editForm").submit(function(e){
   	data : {
   		til : til,
   		context : context,
-  		bestPartDay: bestPartDay,
+  		bestPartDay : bestPartDay,
   		tags : tags
   	},
   	success : function(response){
@@ -57,7 +57,7 @@ jQuery("#editForm").submit(function(e){
 
 
 // get Record JSON from /api/get
-function renderRecord(record){
+function renderRecord(){
 	// first, make sure the #record-holder is empty
 	jQuery('#record-holder').empty();
 

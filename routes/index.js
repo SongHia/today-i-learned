@@ -80,8 +80,8 @@ router.post('/api/create', function(req, res){
   var recordObj = {
     til: req.body.til,
     context: req.body.context,
-    tags: req.body.tags.split(','),
-    bestPartDay: req.body.bestPartDay
+    bestPartDay: req.body.bestPartDay,
+    tags: req.body.tags.split(',')
     // pageURL: req.body.pageURL,
   }
 
@@ -229,6 +229,7 @@ router.post('/api/update/:id', function(req, res){
       // add to object that holds updated data
       dataToUpdate['tags'] = tags;
     }
+
     // if(req.body.pageURL) {
     //   pageURL = req.body.pageURL;
     //   // add to object that holds updated data
