@@ -5,28 +5,19 @@
 // http://localhost:3000/api/delete/:id
 // http://localhost:3000/add-til
 // http://localhost:3000/directory
-
-// (POST routes - use POSTMAN)
+// POST routes
 // http://localhost:3000/api/create
 // http://localhost:3000/api/update/:id
 
 //https://github.com/sslover/designing-for-data-personalization/blob/master/week8/mongoose-cheatsheet.md
-
 // https://songhitp-today-i-learned.herokuapp.com/add-til
 // https://songhitp-today-i-learned.herokuapp.com/directory
 // https://songhitp-today-i-learned.herokuapp.com/twilio-callback
 
-
-
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-
-// our db model
-var Record = require("../models/record.js");
-
-
-//Twilio 
+var Record = require("../models/record.js"); // our db model
 var twilio = require('twilio');
 
 
@@ -97,16 +88,15 @@ router.post('/api/create', function(req, res){
 
     }
 
-    var jsonData = {
-      status: "OK",
-      record: data
-    }
+    // var jsonData = {
+    //   status: "OK",
+    //   record: data
+    // }
 
-    return res.json(jsonData);
+    // return res.json(jsonData);
   
-   
+    return res.redirect('/directory');
   })
- // res.render('directory.html')
 })
 
 //get api
@@ -215,7 +205,7 @@ router.post('/api/update/:id', function(req, res){
       dataToUpdate['til'] = til;
     }
     if(req.body.context) {
-      context = req.body.age;
+      context = req.body.context;
       // add to object that holds updated data
       dataToUpdate['context'] = context;
     }

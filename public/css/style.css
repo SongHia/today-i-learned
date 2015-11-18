@@ -50,9 +50,27 @@ a:hover {
   padding: 5px;
 }
 
+.push {
+  margin-bottom: 80px;
+}
+
 .main h1 {
 	font-family: 'Cooper Hewitt', sans-serif;
   color: #4ECDC4;
+  text-transform: uppercase;
+}
+
+.twilio {
+  background-color: #0FB8E4;
+/*  color: #0F7ADA;*/
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  padding-bottom: 50px;
+  width: 100%;
+}
+
+.twilio h5 {
   text-transform: uppercase;
 }
 
@@ -68,7 +86,7 @@ a:hover {
 .footer {
   background-color: #fff;
   color: #0F7ADA;
-  padding: 5px;
+  padding-top: 10px;
   position: fixed;
   bottom:0;
   width: 100%;

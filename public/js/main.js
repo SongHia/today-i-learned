@@ -13,6 +13,7 @@ jQuery("#editForm").submit(function(e){
 	var bestPartDay = jQuery("#edit-bestPartDay").val();
 	var tags = jQuery("#edit-tags").val();
 	var id = jQuery("#edit-id").val();
+	// var date = jQuery("#edit-date").val();
      
   console.log(id);
       
@@ -23,6 +24,7 @@ jQuery("#editForm").submit(function(e){
   	type : 'POST',
   	// we send the data in a data object (with key/value pairs)
   	data : {
+  		// date : date,
   		til : til,
   		context : context,
   		bestPartDay : bestPartDay,
@@ -70,18 +72,18 @@ function renderRecord(){
 			var record = response.record;
 
 			for(var i=0;i<record.length;i++){
-				//turn string into a date object
+				// turn string into a date object
 				var date =  new Date(record[i].dateAdded);
 
 				var htmlToAdd = '<div class="col-md-4">'+
 					// '<img src='+record[i].imageUrl+' width="100">'+
-					'<h1>'+date.toDateString()+'</h1>'+
-					'<h1>Today I learned: '+record[i].til+'</h1>'+
+					'<h1><span class ="date">'+date.toDateString()+'</span></h1>'+
+					'<h1>Today I learned: <span class="til">'+record[i].til+'</span></h1>'+
 					'<ul>'+
-						'<li>Context: '+record[i].context+'</li>'+
-						'<li>Best Part Of The Day: '+record[i].bestPartDay+'</li>'+
-						'<li>Tags: '+record[i].tags+'</li>'+
-						// '<li>ID: '+record[i]._id+'</li>'+
+						'<li>Context: <span class="context">'+record[i].context+'</span></li>'+
+						'<li>Best Part Of The Day: <span class="bestPartDay">'+record[i].bestPartDay+'</span></li>'+
+						'<li>Tags: <span class="tags">'+record[i].tags+'</span></li>'+
+						'<li class="hide">ID: <span class="id">'+record[i]._id+'</span></li>'+
 						// '<li>Date Added: '+date.toDateString()+'</li>'+
 						// '<li>Best Link: '+record[i].pageURL+'</li>'+
 					'</ul>'+
@@ -105,6 +107,7 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
 
   // now, let's get the values of the records that we're wanting to edit
   // we do this by targeting specific spans within the parent and pulling out the text
+  // var date = $(parent).find('.date').text();
   var til = $(parent).find('.til').text();
   var context = $(parent).find('.context').text();
   var bestPartDay = $(parent).find('.bestPartDay').text();
@@ -112,6 +115,7 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
   var id = $(parent).find('.id').text();
 
   // now let's set the value of the edit fields to those values
+ 	// jQuery("#edit-date").val(date);
  	jQuery("#edit-til").val(til);
 	jQuery("#edit-context").val(context);
 	jQuery("#edit-bestPartDay").val(bestPartDay);
