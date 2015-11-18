@@ -46,7 +46,7 @@ a:hover {
 .main {
   background-color: #fff;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 5px;
 }
 
@@ -86,7 +86,7 @@ a:hover {
 .footer {
   background-color: #fff;
   color: #0F7ADA;
-  padding-top: 8px;
+  padding-top: 6px;
   position: fixed;
   bottom:0;
   width: 100%;
@@ -94,7 +94,7 @@ a:hover {
 
 .footer p {
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 10px;
   color: #fff;
   font-family: 'Cooper Hewitt', sans-serif;
 }
