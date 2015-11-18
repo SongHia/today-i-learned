@@ -88,8 +88,8 @@ function renderRecord(){
 						// '<li>Best Link: '+record[i].pageURL+'</li>'+
 					'</ul>'+
 					// '<a href="/edit/'+record[i]._id+'">Edit Record</a>'+
-					'<button type="button" id="'+record[i]._id+'" onclick="deleteRecord(event)">Delete Record</button>'+
-					'<button type="button" data-toggle="modal" data-target="#editModal"">Edit Record</button>'+
+					'<button type="button" class="edit-button" id="'+record[i]._id+'" onclick="deleteRecord(event)">Delete Record</button>'+
+					'<button type="button" class="edit-button" data-toggle="modal" data-target="#editModal"">Edit Record</button>'+
 				'</div>';
 
 				jQuery("#record-holder").append(htmlToAdd);

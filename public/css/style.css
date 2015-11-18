@@ -16,7 +16,7 @@ label {
 a {
     text-transform: uppercase;
     text-decoration: none;
-    letter-spacing: 2px;
+/*    letter-spacing: 2px;*/
     font-size: 15px;
     padding:12px;
 }
@@ -101,4 +101,9 @@ a:hover {
 
 .footer a {
   color: #4ECDC4;
+}
+
+.edit-button {
+  background-color: #fff;
+  color: #0F7ADA;
 }
