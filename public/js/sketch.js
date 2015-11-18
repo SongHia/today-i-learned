@@ -1,4 +1,4 @@
-  var api = "http://api.giphy.com";
+  var api = "https://api.giphy.com";
   var apiTIL = "https://songhitp-today-i-learned.herokuapp.com/api/get"
   
   //Giphy Endpoints
