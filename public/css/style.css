@@ -8,6 +8,23 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.randbg {
+  background: url('../img/10.gif') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  }
+  .randbg.bg1 {
+  background-image: url('../img/1.gif');
+  }
+  .randbg.bg2 {
+  background-image: url('../img/2.gif');
+  }
+  .randbg.bg3 {
+  background-image: url('../img/3.gif');
+}
+
 label {
   color: #fff;
 
@@ -58,7 +75,7 @@ a:hover {
 
 }
 .push {
-  margin-bottom: 80px;
+  margin-bottom: 200px;
 }
 
 .main h1 {
@@ -113,4 +130,9 @@ a:hover {
 .edit-button {
   background-color: #fff;
   color: #0F7ADA;
+}
+
+.displayDate{
+    font-size:50px;
+    color: #0F7ADA;
 }

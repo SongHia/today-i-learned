@@ -15,12 +15,12 @@
     <!-- Custom CSS inside CSS folder -->
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="libraries/p5.js" type="text/javascript"></script>
+<!--     // <script src="libraries/p5.js" type="text/javascript"></script>
 
-    <script src="libraries/p5.dom.js" type="text/javascript"></script>
-    <script src="libraries/p5.sound.js" type="text/javascript"></script>
+    // <script src="libraries/p5.dom.js" type="text/javascript"></script>
+    // <script src="libraries/p5.sound.js" type="text/javascript"></script>
 
-    <script src="js/sketch.js" type="text/javascript"></script>
+    // <script src="js/sketch.js" type="text/javascript"></script> -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,7 +30,7 @@
     <![endif]-->
   </head>
   
-  <body>
+  <body class="randbg">
 
     <div class="header">
       <div class="container">
@@ -47,16 +47,11 @@
         <div class="main">
           <h1>Today I Learned</h1>
         </div>
-<!--     <div class="row" id="record-holder">
-    </div> -->
+    <div class="row" id="record-display">
+    </div>
   </div>
 
-<!-- p5 -->
-    <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
-  </head>
-  <body>
-    <!--<p>hello world</p>-->
-  </body>
+
 
 
 <div class ="push">
@@ -68,10 +63,14 @@
       </div>
   </div>
 
+
+
   </body>
 
     <!-- JQuery script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+    <!--JQuery randomBG script-->
+    <script src="js/rand.bg.js"></script> 
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
@@ -83,6 +82,16 @@
       $("form").validate({
       }); 
     </script>
+
+
+
+    <script>
+    $(".randbg").RandBG({
+    ClassPrefix: "bg",
+    count: 10
+    });
+    </script>
+
 
     <!-- CUSTOM JS -->
     <script src="js/main.js"></script>

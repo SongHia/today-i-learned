@@ -1,5 +1,6 @@
 function init() {
   renderRecord();
+  renderDisplay();
 }
 
 // edit form button event
@@ -67,7 +68,7 @@ function renderRecord(){
 		url : '/api/get',
 		dataType : 'json',
 		success : function(response) {
-			console.log(response);
+			// console.log(response);
 
 			var record = response.record;
 
@@ -98,6 +99,44 @@ function renderRecord(){
 	})	
 }
 
+// get Record JSON from /api/get
+function renderDisplay(){
+	// first, make sure the #record-holder is empty
+	jQuery('#record-display').empty();
+
+	jQuery.ajax({
+		url : '/api/get',
+		dataType : 'json',
+		success : function(response) {
+			// console.log(response);
+
+			var record = response.record;
+			// console.log(record);
+
+			var i = record[Math.floor(Math.random()*record.length)];
+
+			console.log(i.til);
+	
+			// for(var i=0;i<record.length;i++){
+			// 	turn string into a date object
+				var date =  new Date(i.dateAdded);
+
+				var htmlToAdd = '<div class="col-md-12">'+
+					'<h1><span class ="displayDate">'+date.toDateString()+'</span></h1>'+
+					'<h1><span class="displayTil">'+i.til+'</span></h1>'+
+					'<h1>Context: <span class="displayContext">'+i.context+'</span></h1>'+
+					'<h1>The Best Part: <span class="displayBestPartDay">'+i.bestPartDay+'</span></h1>'+
+					'<h2>Tags: <span class="tags">'+i.tags+'</span></h2>'+
+					'<h2 class="hide">ID: <span class="displayId">'+i._id+'</span></h2>'+
+					'<input type="button" value="TAKE ME BACK AGAIN" onClick="window.location.reload()">'+
+
+				'</div>';
+
+				jQuery("#record-display").append(htmlToAdd);
+			// }
+		}
+	})	
+}
 
 jQuery('#editModal').on('show.bs.modal', function (e) {
   // let's get access to what we just clicked on
