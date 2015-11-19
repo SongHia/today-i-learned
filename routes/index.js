@@ -45,16 +45,16 @@ router.get('/', function(req, res) {
 });
 
 // simple route to show an HTML page for adding data
-router.get('/add-til', function(req,res){
+router.get('/home', function(req,res){
 
-  res.render('add-til.html')
+  res.render('home.html')
 
 })
 
 // simple route to show an HTML page for recorded data
-router.get('/directory', function(req,res){
+router.get('/admin', function(req,res){
 
-  res.render('directory.html')
+  res.render('admin.html')
 
 })
 
