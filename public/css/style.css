@@ -23,7 +23,28 @@ body {
   }
   .randbg.bg3 {
   background-image: url('../img/3.gif');
-}
+  }
+  .randbg.bg4 {
+  background-image: url('../img/4.gif');
+  }
+  .randbg.bg5 {
+  background-image: url('../img/5.gif');
+  }
+  .randbg.bg6 {
+  background-image: url('../img/6.gif');
+  }
+  .randbg.bg7 {
+  background-image: url('../img/7.gif');
+  }
+  .randbg.bg8 {
+  background-image: url('../img/8.gif');
+  }
+  .randbg.bg9 {
+  background-image: url('../img/9.gif');
+  }
+  .randbg.bg10 {
+  background-image: url('../img/10.gif');
+  }
 
 label {
   color: #fff;
