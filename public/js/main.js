@@ -1,6 +1,15 @@
+  //Giphy Endpoints
+  var api = "https://api.giphy.com";
+  var randomGif = "/v1/gifs/random?";
+  var trendingGif = "/v1/gifs/trending?";
+  var searchGif = "/v1/gifs/search?";
+  var query = "&q=til";
+  var apiKey = "&api_key=dc6zaTOxFJmzC";
+
 function init() {
   renderRecord();
   renderDisplay();
+  // renderGiphy(); //new
 }
 
 // edit form button event
@@ -99,7 +108,7 @@ function renderRecord(){
 	})	
 }
 
-// get Record JSON from /api/get
+// get Record JSON from /api/get DONT TOUCH
 function renderDisplay(){
 	// first, make sure the #record-holder is empty
 	jQuery('#record-display').empty();
@@ -115,7 +124,7 @@ function renderDisplay(){
 
 			var i = record[Math.floor(Math.random()*record.length)];
 
-			console.log(i.til);
+			// console.log(i.til);
 	
 			// for(var i=0;i<record.length;i++){
 			// 	turn string into a date object
@@ -137,6 +146,51 @@ function renderDisplay(){
 		}
 	})	
 }
+
+
+// new GET GIPHY JSON FROM API
+function renderGiphy(){
+	// first, make sure the #record-holder is empty
+	jQuery('#giphy-display').empty();
+
+api + searchGif + apiKey + query;
+
+	jQuery.ajax({
+		url : api + trendingGif + apiKey,
+		dataType : 'json',
+		success : function(response) {
+			// console.log(response);
+
+			var data = response.data;
+			// console.log(data);
+
+			var i = data[Math.floor(Math.random()*data.length)];
+
+			console.log(i.images.original.url);
+			
+			// // for(var i=0;i<record.length;i++){
+			// // 	turn string into a date object
+			// 	var date =  new Date(i.dateAdded);
+
+			// 	var htmlToAdd = '<div class="col-md-12">'+
+			// 		'<h1><span class ="displayDate">'+date.toDateString()+'</span></h1>'+
+			// 		'<h2><span class="displayTil">'+i.til+'</span></h2>'+
+			// 		'<h2>Context: <span class="displayContext">'+i.context+'</span></h2>'+
+			// 		'<h2>The Best Part: <span class="displayBestPartDay">'+i.bestPartDay+'</span></h2>'+
+			// 		'<h3>Tags: <span class="tags">'+i.tags+'</span></h3>'+
+			// 		'<h2 class="hide">ID: <span class="displayId">'+i._id+'</span></h2>'+
+			// 		'<input type="button" class="refresh-button" value="TIME TRAVEL" onClick="window.location.reload()">'+
+
+			// 	'</div>';
+
+			// 	jQuery("#record-display").append(htmlToAdd);
+			// // }
+		}
+	})	
+}
+
+
+
 
 jQuery('#editModal').on('show.bs.modal', function (e) {
   // let's get access to what we just clicked on

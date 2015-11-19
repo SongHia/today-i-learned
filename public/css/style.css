@@ -10,6 +10,7 @@ body {
 
 .randbg {
   background: url('../img/10.gif') no-repeat center center fixed;
+/*    background: url('https://media2.giphy.com/media/wy63WPXSamvFC/giphy.gif') no-repeat center center fixed;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -45,6 +46,8 @@ body {
   .randbg.bg10 {
   background-image: url('../img/10.gif');
   }
+
+
 
 label {
   color: #fff;
