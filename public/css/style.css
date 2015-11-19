@@ -6,17 +6,23 @@ body {
   background: #4ECDC4;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
-}
 
-.randbg {
-  background: url('../img/10.gif') no-repeat center center fixed;
-/*    background: url('https://media2.giphy.com/media/wy63WPXSamvFC/giphy.gif') no-repeat center center fixed;*/
+  /*GIPHY BG PROPERTIES */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  }
-  .randbg.bg1 {
+}
+
+/*.randbg {*/
+/*  background: url('../img/10.gif') no-repeat center center fixed;
+  background: url('https://media2.giphy.com/media/wy63WPXSamvFC/giphy.gif') no-repeat center center fixed;*/
+/*  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  }*/
+/*  .randbg.bg1 {
   background-image: url('../img/1.gif');
   }
   .randbg.bg2 {
@@ -45,9 +51,16 @@ body {
   }
   .randbg.bg10 {
   background-image: url('../img/10.gif');
-  }
+  }*/
 
 
+body h1 {
+    text-shadow: 2px 2px #000;
+}
+
+body h2 {
+    text-shadow: 2px 2px #000;
+}
 
 label {
   color: #fff;

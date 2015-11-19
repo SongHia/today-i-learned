@@ -1,15 +1,15 @@
-  //Giphy Endpoints
-  var api = "https://api.giphy.com";
-  var randomGif = "/v1/gifs/random?";
-  var trendingGif = "/v1/gifs/trending?";
-  var searchGif = "/v1/gifs/search?";
-  var query = "&q=til";
-  var apiKey = "&api_key=dc6zaTOxFJmzC";
+//Giphy Endpoints
+var api = "https://api.giphy.com";
+var randomGif = "/v1/gifs/random?";
+var trendingGif = "/v1/gifs/trending?";
+var searchGif = "/v1/gifs/search?";
+var query = "&q=til";
+var apiKey = "&api_key=dc6zaTOxFJmzC";
 
 function init() {
   renderRecord();
   renderDisplay();
-  // renderGiphy(); //new
+  renderGiphy();
 }
 
 // edit form button event
@@ -17,7 +17,6 @@ function init() {
 jQuery("#editForm").submit(function(e){
 
 	// first, let's pull out all the values
-	// the name form field value
 	var til = jQuery("#edit-til").val();
 	var context = jQuery("#edit-context").val();
 	var bestPartDay = jQuery("#edit-bestPartDay").val();
@@ -25,13 +24,13 @@ jQuery("#editForm").submit(function(e){
 	var id = jQuery("#edit-id").val();
 	// var date = jQuery("#edit-date").val();
      
-  console.log(id);
+	// console.log(id); //status check
       
 	// POST the data from above to our API create route
-  jQuery.ajax({
-  	url : '/api/update/'+id,
-  	dataType : 'json',
-  	type : 'POST',
+  	jQuery.ajax({
+  		url : '/api/update/'+id,
+  		dataType : 'json',
+  		type : 'POST',
   	// we send the data in a data object (with key/value pairs)
   	data : {
   		// date : date,
@@ -42,22 +41,17 @@ jQuery("#editForm").submit(function(e){
   	},
   	success : function(response){
   		if(response.status=="OK"){
-	  		// success
-	  		console.log(response);
-	  		// re-render the records
-	  		renderRecord();
-	  		// now, close the modal
-	  		$('#editModal').modal('hide')
-	  		// now, clear the input fields
-	  		jQuery("#editForm input").val('');
+	  		// console.log(response); // test for success
+	  		renderRecord(); // re-render the records
+	  		$('#editModal').modal('hide') // now, close the modal
+	  		jQuery("#editForm input").val(''); // now, clear the input fields
   		}
   		else {
   			alert("something went wrong with edit 1");
   		}
   	},
   	error : function(err){
-  		// do error checking
-  		alert("something went wrong with edit 2");
+  		alert("something went wrong with edit 2"); // do error checking
   		console.error(err);
   	}
   }); 
@@ -82,8 +76,8 @@ function renderRecord(){
 			var record = response.record;
 
 			for(var i=0;i<record.length;i++){
-				// turn string into a date object
-				var date =  new Date(record[i].dateAdded);
+				
+				var date =  new Date(record[i].dateAdded); // turn string into a date object
 
 				var htmlToAdd = '<div class="col-md-4">'+
 					// '<img src='+record[i].imageUrl+' width="100">'+
@@ -108,7 +102,7 @@ function renderRecord(){
 	})	
 }
 
-// get Record JSON from /api/get DONT TOUCH
+// get Record JSON from /api/get 
 function renderDisplay(){
 	// first, make sure the #record-holder is empty
 	jQuery('#record-display').empty();
@@ -123,12 +117,10 @@ function renderDisplay(){
 			// console.log(record);
 
 			var i = record[Math.floor(Math.random()*record.length)];
-
 			// console.log(i.til);
 	
 			// for(var i=0;i<record.length;i++){
-			// 	turn string into a date object
-				var date =  new Date(i.dateAdded);
+				var date =  new Date(i.dateAdded); // 	turn string into a date object
 
 				var htmlToAdd = '<div class="col-md-12">'+
 					'<h1><span class ="displayDate">'+date.toDateString()+'</span></h1>'+
@@ -138,7 +130,6 @@ function renderDisplay(){
 					'<h3>Tags: <span class="tags">'+i.tags+'</span></h3>'+
 					'<h2 class="hide">ID: <span class="displayId">'+i._id+'</span></h2>'+
 					'<input type="button" class="refresh-button" value="TIME TRAVEL" onClick="window.location.reload()">'+
-
 				'</div>';
 
 				jQuery("#record-display").append(htmlToAdd);
@@ -150,78 +141,49 @@ function renderDisplay(){
 
 // new GET GIPHY JSON FROM API
 function renderGiphy(){
-	// first, make sure the #record-holder is empty
-	jQuery('#giphy-display').empty();
-
-api + searchGif + apiKey + query;
-
 	jQuery.ajax({
 		url : api + trendingGif + apiKey,
 		dataType : 'json',
 		success : function(response) {
-			// console.log(response);
 
-			var data = response.data;
-			// console.log(data);
-
-			var i = data[Math.floor(Math.random()*data.length)];
-
-			console.log(i.images.original.url);
-			
-			// // for(var i=0;i<record.length;i++){
-			// // 	turn string into a date object
-			// 	var date =  new Date(i.dateAdded);
-
-			// 	var htmlToAdd = '<div class="col-md-12">'+
-			// 		'<h1><span class ="displayDate">'+date.toDateString()+'</span></h1>'+
-			// 		'<h2><span class="displayTil">'+i.til+'</span></h2>'+
-			// 		'<h2>Context: <span class="displayContext">'+i.context+'</span></h2>'+
-			// 		'<h2>The Best Part: <span class="displayBestPartDay">'+i.bestPartDay+'</span></h2>'+
-			// 		'<h3>Tags: <span class="tags">'+i.tags+'</span></h3>'+
-			// 		'<h2 class="hide">ID: <span class="displayId">'+i._id+'</span></h2>'+
-			// 		'<input type="button" class="refresh-button" value="TIME TRAVEL" onClick="window.location.reload()">'+
-
-			// 	'</div>';
-
-			// 	jQuery("#record-display").append(htmlToAdd);
-			// // }
+			var data = response.data; //stores the data object
+			var i = data[Math.floor(Math.random()*data.length)]; //randomly picks data object
+			// console.log(i.images.original.url); //checks the url property
+			$('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
+			// $('randbg').css('background', 'url(' + i.images.original.url + ')' + 'no-repeat center center fixed'); //writes the url to css as bg image
 		}
 	})	
 }
 
 
-
-
 jQuery('#editModal').on('show.bs.modal', function (e) {
-  // let's get access to what we just clicked on
-  var clickedButton = e.relatedTarget;
-  // now let's get its parent
-  var parent = jQuery(clickedButton).parent();
+	// let's get access to what we just clicked on
+	var clickedButton = e.relatedTarget;
+	// now let's get its parent
+	var parent = jQuery(clickedButton).parent();
 
-  // now, let's get the values of the records that we're wanting to edit
-  // we do this by targeting specific spans within the parent and pulling out the text
-  // var date = $(parent).find('.date').text();
-  var til = $(parent).find('.til').text();
-  var context = $(parent).find('.context').text();
-  var bestPartDay = $(parent).find('.bestPartDay').text();
-  var tags = $(parent).find('.tags').text();
-  var id = $(parent).find('.id').text();
+    // now, let's get the values of the records that we're wanting to edit
+    // we do this by targeting specific spans within the parent and pulling out the text
+    // var date = $(parent).find('.date').text();
+	var til = $(parent).find('.til').text();
+	var context = $(parent).find('.context').text();
+	var bestPartDay = $(parent).find('.bestPartDay').text();
+	var tags = $(parent).find('.tags').text();
+	var id = $(parent).find('.id').text();
 
-  // now let's set the value of the edit fields to those values
+  	// now let's set the value of the edit fields to those values
  	// jQuery("#edit-date").val(date);
- 	jQuery("#edit-til").val(til);
+	jQuery("#edit-til").val(til);
 	jQuery("#edit-context").val(context);
 	jQuery("#edit-bestPartDay").val(bestPartDay);
 	jQuery("#edit-tags").val(tags);
 	jQuery("#edit-id").val(id);
-
 })
 
 
 function deleteRecord(event){
 	var targetedId = event.target.id;
 	console.log('the record to delete is ' + targetedId);
-
 	// now, let's call the delete route with AJAX
 	jQuery.ajax({
 		url : '/api/delete/'+targetedId,
@@ -229,11 +191,10 @@ function deleteRecord(event){
 		success : function(response) {
 			// now, let's re-render the records
 			renderRecord();
-
 		}
 	})
-
 	event.preventDefault();
 }
+
 
 window.addEventListener('load', init())
