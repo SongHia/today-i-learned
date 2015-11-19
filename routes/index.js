@@ -102,7 +102,7 @@ router.post('/api/create', function(req, res){
 
     // return res.json(jsonData);
   
-    return res.redirect('/directory');
+    return res.redirect('/archive');
   })
 })
 
