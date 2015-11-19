@@ -128,7 +128,7 @@ function renderDisplay(){
 					'<h2>The Best Part: <span class="displayBestPartDay">'+i.bestPartDay+'</span></h2>'+
 					'<h3>Tags: <span class="tags">'+i.tags+'</span></h3>'+
 					'<h2 class="hide">ID: <span class="displayId">'+i._id+'</span></h2>'+
-					'<input type="button" class="refresh-button" value="TAKE ME BACK AGAIN" onClick="window.location.reload()">'+
+					'<input type="button" class="refresh-button" value="TIME TRAVEL" onClick="window.location.reload()">'+
 
 				'</div>';
 

@@ -59,9 +59,9 @@ router.get('/directory', function(req,res){
 })
 
 // simple route to show an HTML page for recorded data
-router.get('/display', function(req,res){
+router.get('/archive', function(req,res){
 
-  res.render('display.html')
+  res.render('archive.html')
 
 })
 
