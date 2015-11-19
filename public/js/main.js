@@ -123,12 +123,12 @@ function renderDisplay(){
 
 				var htmlToAdd = '<div class="col-md-12">'+
 					'<h1><span class ="displayDate">'+date.toDateString()+'</span></h1>'+
-					'<h1><span class="displayTil">'+i.til+'</span></h1>'+
-					'<h1>Context: <span class="displayContext">'+i.context+'</span></h1>'+
-					'<h1>The Best Part: <span class="displayBestPartDay">'+i.bestPartDay+'</span></h1>'+
-					'<h2>Tags: <span class="tags">'+i.tags+'</span></h2>'+
+					'<h2><span class="displayTil">'+i.til+'</span></h2>'+
+					'<h2>Context: <span class="displayContext">'+i.context+'</span></h2>'+
+					'<h2>The Best Part: <span class="displayBestPartDay">'+i.bestPartDay+'</span></h2>'+
+					'<h3>Tags: <span class="tags">'+i.tags+'</span></h3>'+
 					'<h2 class="hide">ID: <span class="displayId">'+i._id+'</span></h2>'+
-					'<input type="button" value="TAKE ME BACK AGAIN" onClick="window.location.reload()">'+
+					'<input type="button" class="refresh-button" value="TAKE ME BACK AGAIN" onClick="window.location.reload()">'+
 
 				'</div>';
 

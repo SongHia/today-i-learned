@@ -132,7 +132,11 @@ a:hover {
   color: #0F7ADA;
 }
 
+.refresh-button {
+  color: #0F7ADA;
+}
+
 .displayDate{
-    font-size:50px;
+ /*   font-size:50px;*/
     color: #0F7ADA;
 }
