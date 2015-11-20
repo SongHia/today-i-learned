@@ -62,6 +62,10 @@ body h2 {
     text-shadow: 2px 2px #000;
 }
 
+body h3 {
+    text-shadow: 2px 2px #000;
+}
+
 label {
   color: #fff;
 
@@ -85,7 +89,7 @@ a:hover {
   text-decoration: none;
 }
 
-.header{
+.header {
       background-color: #4ECDC4;
 }
 
@@ -118,6 +122,12 @@ a:hover {
 	font-family: 'Cooper Hewitt', sans-serif;
   color: #4ECDC4;
   text-transform: uppercase;
+}
+
+#record-display {
+  margin: 0 auto;
+  position: relative;
+  text-align: left; 
 }
 
 .twilio {

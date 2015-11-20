@@ -15,7 +15,6 @@
     <!-- Custom CSS inside CSS folder -->
     <link rel="stylesheet" href="css/style.css">
 
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,50 +34,55 @@
       </div>
     </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="main">
-          <h1>Today I Learned</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+
+          <div class="main">
+            <h1>Today I Learned</h1>
+          </div>
+          
+          <form method="post" action="/api/create">
+            
+            <div class="form-group">
+              <label for="name">TIL</label>
+              <input type="text" class="form-control" id="til" placeholder="I learned that..." name="til" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="itpYear">The Context</label>
+              <input type="text" class="form-control" id="context" placeholder="The context for this was..." name="context" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="imageUrl">Best Part Of The Day</label>
+              <input type="text" class="form-control" id="bestPartDay" placeholder="The best part of my day was..." name="bestPartDay" required>
+            </div>  
+            
+            <div class="form-group">
+              <label for="imageUrl">Tags</label>
+              <input type="text" class="form-control" id="tags" placeholder="Add a few tags separated by comma" name="tags" required>
+            </div>
+            
+            <button type="submit" class="btn btn-default">Submit</button>
+
+          </form> 
+
         </div>
-        <form method="post" action="/api/create">
-          <div class="form-group">
-            <label for="name">TIL</label>
-            <input type="text" class="form-control" id="til" placeholder="I learned that..." name="til" required>
-          </div>
-          <div class="form-group">
-            <label for="itpYear">The Context</label>
-            <input type="text" class="form-control" id="context" placeholder="The context for this was..." name="context" required>
-          </div>
-          <div class="form-group">
-            <label for="imageUrl">Best Part Of The Day</label>
-            <input type="text" class="form-control" id="bestPartDay" placeholder="The best part of my day was..." name="bestPartDay" required>
-          </div>  
-          <div class="form-group">
-            <label for="imageUrl">Tags</label>
-            <input type="text" class="form-control" id="tags" placeholder="Add a few tags separated by comma" name="tags" required>
-          </div>
-<!--           <div class="form-group">
-            <label for="imageUrl">Best Link Of The Day</label>
-            <input type="text" class="form-control" id="pageURL" placeholder="Add a url here including the 'http' " name="pageURL">
-          </div>         --> 
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form> 
       </div>
     </div>
-  </div>
   
- <div class="twilio">
-  <div class = "container">
-    <h5>text 917-746-4128 in the format: TIL , context , best part, tag1. tag2. tag3</h5>
-  </div>
- </div>
+    <div class="twilio">
+      <div class = "container">
+        <h5>text 917-746-4128 in the format: TIL , context , best part, tag1. tag2. tag3</h5>
+      </div>
+    </div>
 
- <div class="footer">
+    <div class="footer">
       <div class="container">
         <p>&copy; <a href="http://songhia.com">Zero Co. 2015</a></p>
       </div>
-  </div>
+    </div>
 
   </body>
 
@@ -90,7 +94,6 @@
 
     <!-- JQuery validate -->
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
-
     <script type="text/javascript">
       $("form").validate({
       }); 
