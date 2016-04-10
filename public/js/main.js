@@ -3,13 +3,17 @@ var api = "https://api.giphy.com";
 var randomGif = "/v1/gifs/random?";
 var trendingGif = "/v1/gifs/trending?";
 var searchGif = "/v1/gifs/search?";
-var query = "&q=til";
+var query = "&q=";
 var apiKey = "&api_key=dc6zaTOxFJmzC";
+
+//new
+var tagArray;
+var selectTag;
 
 function init() {
   renderRecord();
   renderDisplay();
-  renderGiphy();
+  // renderGiphy();
 }
 
 // edit form button event
@@ -133,7 +137,16 @@ function renderDisplay(){
 				'</div>';
 
 				jQuery("#record-display").append(htmlToAdd);
+
+				//new
+				tagArray = i.tags;
+				// console.log("tags: " + tagArray);
+				var j = tagArray[Math.floor(Math.random()*tagArray.length)];
+				// console.log("j value: " + j);
+				selectTag = j;
+				console.log("select tag: " + selectTag);
 			// }
+				renderGiphy();
 		}
 	})	
 }
@@ -142,17 +155,23 @@ function renderDisplay(){
 // new GET GIPHY JSON FROM API
 function renderGiphy(){
 	jQuery.ajax({
-		url : api + trendingGif + apiKey,
+		// url : api + trendingGif + apiKey, //trending gif
+		//new for tag related
+		url: api + searchGif + query + selectTag + apiKey,
 		dataType : 'json',
 		success : function(response) {
 
 			var data = response.data; //stores the data object
-			var i = data[Math.floor(Math.random()*data.length)]; //randomly picks data object
+			var i = data[Math.floor(Math.random()*data.length)]; //randomly picks data object from current trending gifs
 			// console.log(i.images.original.url); //checks the url property
 			$('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
 			// $('randbg').css('background', 'url(' + i.images.original.url + ')' + 'no-repeat center center fixed'); //writes the url to css as bg image
+			// console.log("giphy url: " + i.url);
+			console.log("giphy queryTags: " + selectTag);
+			// console.log("giphy image url: " + i.images.original.url);
 		}
 	})	
+
 }
 
 
