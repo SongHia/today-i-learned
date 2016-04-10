@@ -1,3 +1,11 @@
+## TODAY I LEARNED
+===============================
+Additions: Twilio + Giphy
+
+TIL.ly is a lightweight journaling webapp in progress.
+
+
+MODIFIED FROM Sam Slover's:
 ## Node.js / Express.js / MongoDb (+Mongoose) Boilerplate
 
 This is boilerplate code for setting up a simple node.js RESTful API app using: the express.js framework, a MongoDb database (with the help of Mongoose), and hosting it on Heroku. Please refer to the following documentation for each of these components:
@@ -168,14 +176,16 @@ For example, open up package.json. You can see we are setting our dependent pack
 package.json
 	
 	"dependencies": {
-	  "body-parser": "~1.13.2",
-	  "cookie-parser": "~1.3.5",
-	  "debug": "~2.2.0",
-	  "express": "~4.13.1",
-	  "mongoose": "^4.1.10",
-	  "morgan": "~1.6.1",
-	  "node-env-file": "^0.1.7",
-	  "serve-favicon": "~2.3.0"
+		"body-parser": "~1.13.2",
+	    "cookie-parser": "~1.3.5",
+	    "debug": "~2.2.0",
+	    "express": "~4.13.1",
+	    "hogan-express": "^0.5.2",
+	    "mongoose": "^4.1.10",
+	    "morgan": "~1.6.1",
+	    "node-env-file": "^0.1.7",
+	    "serve-favicon": "~2.3.0",
+	    "twilio": "^2.5.2"
 	}
 
 Dependencies are then declared in the app.js like:
