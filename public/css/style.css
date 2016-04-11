@@ -1,27 +1,37 @@
 /**************/
+
+
 /* Custom CSS */
+
+
 /**************/
 
 body {
-  background: #4ECDC4;
-  color: #fff;
-  font-family: 'Montserrat', sans-serif;
-
-  /*GIPHY BG PROPERTIES */
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: #4ECDC4;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    /*GIPHY BG PROPERTIES */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
+
 /*.randbg {*/
+
+
 /*  background: url('../img/10.gif') no-repeat center center fixed;
   background: url('https://media2.giphy.com/media/wy63WPXSamvFC/giphy.gif') no-repeat center center fixed;*/
+
+
 /*  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   }*/
+
+
 /*  .randbg.bg1 {
   background-image: url('../img/1.gif');
   }
@@ -53,7 +63,6 @@ body {
   background-image: url('../img/10.gif');
   }*/
 
-
 body h1 {
     text-shadow: 2px 2px #000;
 }
@@ -67,131 +76,123 @@ body h3 {
 }
 
 label {
-  color: #fff;
-
+    color: #fff;
 }
 
 a {
     text-transform: uppercase;
     text-decoration: none;
-/*    letter-spacing: 2px;*/
+    /*    letter-spacing: 2px;*/
     font-size: 15px;
-    padding:12px;
+    padding: 12px;
     color: #fff;
 }
 
 a:visited {
-  color: #fff;
-  text-decoration: none;
+    color: #fff;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .header {
-      background-color: #4ECDC4;
+    background-color: #4ECDC4;
 }
 
 .nav li {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  display: inline-block;
-/*  margin:0 10px 0 10px;*/
-  text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    display: inline-block;
+    /*  margin:0 10px 0 10px;*/
+    text-transform: uppercase;
 }
 
 .main {
-  background-color: #fff;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  padding: 5px;
+    background-color: #fff;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 5px;
 }
 
 .giphy img {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 .push {
-  margin-bottom: 200px;
+    margin-bottom: 80px;
 }
 
 .main h1 {
-	font-family: 'Cooper Hewitt', sans-serif;
-  color: #4ECDC4;
-  text-transform: uppercase;
+    font-family: 'Cooper Hewitt', sans-serif;
+    color: #4ECDC4;
+    text-transform: uppercase;
 }
 
 #record-display {
-  margin: 0 auto;
-  position: relative;
-  text-align: left; 
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
 }
 
-.twilio {
+
+/*.twilio {
   background-color: #0FB8E4;
-/*  color: #0F7ADA;*/
   color: #fff;
   position: fixed;
   bottom: 0;
   padding-bottom: 70px;
   width: 100%;
   text-align: center;
-}
+}*/
 
-.twilio h5 {
+
+/*.twilio h5 {
   text-transform: uppercase;
 }
+*/
 
-.modal-header h4{
-  font-family: 'Cooper Hewitt', sans-serif;
-  color: #0F7ADA;
+.modal-header h4 {
+    font-family: 'Cooper Hewitt', sans-serif;
+    color: #0F7ADA;
 }
 
 .modal-body {
-  background: #0F7ADA;
+    background: #0F7ADA;
 }
 
 .footer {
-  background-color: #fff;
-  color: #0F7ADA;
-  padding-top: 2px;
-  position: fixed;
-  bottom:0;
-  width: 100%;
+    background-color: #0FB8E4;
+    color: #0F7ADA;
+    padding-top: 2px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
-.footer .container {
+.footer h6 {
+    text-transform: uppercase;
+    color: #fff;
+    font-family: 'Cooper Hewitt', sans-serif;
+    text-align: left;
 }
 
-.footer h5 {
-  text-transform: uppercase;
-  color: #fff;
-  font-family: 'Cooper Hewitt', sans-serif;
-  text-align: left;
+/*.footer a {
+    color: #4ECDC4;
 }
-
-.footer a {
-  color: #4ECDC4;
-}
-
-
-.footer img {
-/*    display: block;
-    margin: 0 auto;*/
-}
-
+*/
 .edit-button {
-  background-color: #fff;
-  color: #0F7ADA;
+    background-color: #fff;
+    color: #0F7ADA;
 }
 
 .refresh-button {
-  color: #0F7ADA;
+    color: #0F7ADA;
 }
 
-.displayDate{
- /*   font-size:50px;*/
+.displayDate {
+    /*   font-size:50px;*/
     color: #0F7ADA;
 }
