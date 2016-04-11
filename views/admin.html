@@ -10,6 +10,9 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- JQUERY UI CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
     <!-- Custom CSS inside CSS folder -->
     <link rel="stylesheet" href="css/style.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,6 +38,9 @@
             <h1>Today I Learned</h1>
         </div>
     </div>
+    
+    <p>Date: <input type="text" id="datepicker"></p>
+
     <div class="row" id="record-holder">
     </div>
     <!-- Edit Modal -->
@@ -71,6 +77,15 @@
                                 <input type="text" class="form-control" id="edit-tags" placeholder="Tags (separated by comma)" name="tags" required>
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="dateAdded" class="col-sm-2 control-label">Date Added</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="edit-dateAdded" placeholder="date Added" name="dateAdded" required>
+                            </div>
+                        </div>
+
+                        <!-- don't show ID -->
                         <div class="form-group hide">
                             <label for="id" class="col-sm-2 control-label">ID</label>
                             <div class="col-sm-10">
@@ -87,6 +102,7 @@
             </div>
         </div>
     </div>
+<!-- Edit Modal Fin -->
     <div class="push">
     </div>
     <div class="footer">
@@ -103,6 +119,13 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
 <script type="text/javascript">
 $("form").validate({});
+</script>
+<!--JQuery UI JS -->
+ <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ <script>
+  $(function() {
+    $( "#edit-dateAdded" ).datepicker();
+  });
 </script>
 <!-- CUSTOM JS -->
 <script src="js/admin.js"></script>

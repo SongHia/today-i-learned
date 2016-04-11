@@ -19,7 +19,7 @@ jQuery("#editForm").submit(function(e) {
     var bestPartDay = jQuery("#edit-bestPartDay").val();
     var tags = jQuery("#edit-tags").val();
     var id = jQuery("#edit-id").val();
-    // var date = jQuery("#edit-date").val();
+    var dateAdded = jQuery("#edit-dateAdded").val(); //new
 
     // POST the data from above to our API create route
     jQuery.ajax({
@@ -32,7 +32,8 @@ jQuery("#editForm").submit(function(e) {
             til: til,
             context: context,
             bestPartDay: bestPartDay,
-            tags: tags
+            tags: tags,
+            dateAdded: dateAdded //new
         },
         success: function(response) {
             if (response.status == "OK") {
@@ -69,6 +70,7 @@ function renderRecord() {
                 var date = new Date(record[i].dateAdded); // turn string into a date object
                 var htmlToAdd = '<div class="col-md-4">' +
                     '<h1><span class ="date">' + date.toDateString() + '</span></h1>' +
+                    // '<h1><span class ="date">' + record[i].dateAdded + '</span></h1>' +
                     '<h1>Today I learned: <span class="til">' + record[i].til + '</span></h1>' +
                     '<ul>' +
                     '<li>Context: <span class="context">' + record[i].context + '</span></li>' +
@@ -107,12 +109,13 @@ jQuery('#editModal').on('show.bs.modal', function(e) {
 
     // now, let's get the values of the records that we're wanting to edit
     // we do this by targeting specific spans within the parent and pulling out the text
-    // var date = $(parent).find('.date').text();
+    
     var til = $(parent).find('.til').text();
     var context = $(parent).find('.context').text();
     var bestPartDay = $(parent).find('.bestPartDay').text();
     var tags = $(parent).find('.tags').text();
     var id = $(parent).find('.id').text();
+    var dateAdded = $(parent).find('.dateAdded').text(); //new
 
     // now let's set the value of the edit fields to those values
     // jQuery("#edit-date").val(date);
@@ -121,6 +124,7 @@ jQuery('#editModal').on('show.bs.modal', function(e) {
     jQuery("#edit-bestPartDay").val(bestPartDay);
     jQuery("#edit-tags").val(tags);
     jQuery("#edit-id").val(id);
+    jQuery("edit-dateAdded").val(dateAdded); //new
 })
 
 function deleteRecord(event) {

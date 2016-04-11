@@ -101,6 +101,10 @@ a:hover {
   text-transform: uppercase;
 }
 
+#datepicker {
+  color: #000;
+}
+
 .main {
   background-color: #fff;
   margin: 0 auto;
@@ -113,9 +117,8 @@ a:hover {
   width: 100%;
 }
 
-}
 .push {
-  margin-bottom: 400px;
+  margin-bottom: 200px;
 }
 
 .main h1 {
