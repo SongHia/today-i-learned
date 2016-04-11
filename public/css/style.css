@@ -101,10 +101,6 @@ a:hover {
   text-transform: uppercase;
 }
 
-#datepicker {
-  color: #000;
-}
-
 .main {
   background-color: #fff;
   margin: 0 auto;
@@ -121,7 +117,7 @@ a:hover {
   margin-bottom: 200px;
 }
 
-.main h1 {
+.main h2 {
 	font-family: 'Cooper Hewitt', sans-serif;
   color: #4ECDC4;
   text-transform: uppercase;
@@ -139,8 +135,9 @@ a:hover {
   color: #fff;
   position: fixed;
   bottom: 0;
-  padding-bottom: 40px;
+  padding-bottom: 70px;
   width: 100%;
+  text-align: center;
 }
 
 .twilio h5 {
@@ -159,21 +156,30 @@ a:hover {
 .footer {
   background-color: #fff;
   color: #0F7ADA;
-  padding-top: 6px;
+  padding-top: 2px;
   position: fixed;
   bottom:0;
   width: 100%;
 }
 
-.footer p {
+.footer .container {
+}
+
+.footer h5 {
   text-transform: uppercase;
-  font-size: 10px;
   color: #fff;
   font-family: 'Cooper Hewitt', sans-serif;
+  text-align: left;
 }
 
 .footer a {
   color: #4ECDC4;
+}
+
+
+.footer img {
+/*    display: block;
+    margin: 0 auto;*/
 }
 
 .edit-button {
