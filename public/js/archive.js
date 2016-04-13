@@ -44,7 +44,7 @@ function renderDisplay() {
                     '<h4>Context: <span class="displayContext">' + i.context + '</span></h4>' +
                     '<h4>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h4>' +
                     '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
-                    '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
+                    // '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
                     '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
                     '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
                     '</div>';
