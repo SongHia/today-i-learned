@@ -8,6 +8,7 @@ var recordSchema = new Schema({
 	context: String,
 	tags: [String],
 	bestPartDay: String,
+	name: String,
 	//pageURL: String,
 	dateAdded : { type: Date, default: Date.now },
 })

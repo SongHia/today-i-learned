@@ -9,17 +9,10 @@
 // http://localhost:3000/api/create
 // http://localhost:3000/api/update/:id
 
-//https://github.com/sslover/designing-for-data-personalization/blob/master/week8/mongoose-cheatsheet.md
-// https://songhitp-today-i-learned.herokuapp.com/add-til
-// https://songhitp-today-i-learned.herokuapp.com/directory
-// https://songhitp-today-i-learned.herokuapp.com/twilio-callback
-
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Record = require("../models/record.js"); // our db model
-var twilio = require('twilio');
-
 
 /**
  * GET '/'
@@ -31,16 +24,16 @@ router.get('/', function(req, res) {
 
   console.log('home page requested!');
 
-  var jsonData = {
-  	'name': 'today-i-learned',
-  	'api-status':'OK',
-    'instructions': 'text 917-746-4128 with your lesson of the day',
-    'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
-  }
-  // respond with json data
-  res.json(jsonData)
+  // var jsonData = {
+  // 	'name': 'today-i-learned',
+  // 	'api-status':'OK',
+  //   'instructions': 'text 917-746-4128 with your lesson of the day',
+  //   'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
+  // }
+  // // respond with json data
+  // res.json(jsonData)
 
-  // res.render('directory.html')
+  res.render('home.html')
 
 });
 
@@ -65,6 +58,13 @@ router.get('/archive', function(req,res){
 
 })
 
+// simple route to show an HTML page for success
+router.get('/success', function(req,res){
+
+  res.render('success.html')
+
+})
+
 // /**
 //  * POST '/api/create'
 //  * Receives a POST request of the new user and location, saves to db, responds back
@@ -79,6 +79,7 @@ router.post('/api/create', function(req, res){
     til: req.body.til,
     context: req.body.context,
     bestPartDay: req.body.bestPartDay,
+    name: req.body.name,
     tags: req.body.tags.split(',')
     // pageURL: req.body.pageURL,
   }
@@ -102,7 +103,7 @@ router.post('/api/create', function(req, res){
 
     // return res.json(jsonData);
   
-    return res.redirect('/archive');
+    return res.redirect('/success');
   })
 })
 
@@ -202,7 +203,9 @@ router.post('/api/update/:id', function(req, res){
    var dataToUpdate = {}; // a blank object of data to update
 
     // pull out the information from the req.body and add it to the object to update
-    var til, context, bestPartDay, tags; 
+    var til, context, bestPartDay, name, dateAdded;
+    var tags = []; // blank array to hold tags
+
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
@@ -221,11 +224,24 @@ router.post('/api/update/:id', function(req, res){
     // add to object that holds updated data
     dataToUpdate['bestPartDay'] = bestPartDay;
     }
-    var tags = []; // blank array to hold tags
+    
     if(req.body.tags){
       tags = req.body.tags.split(","); // split string into array
       // add to object that holds updated data
       dataToUpdate['tags'] = tags;
+    }
+    if(req.body.name) {
+    name = req.body.name;
+    // add to object that holds updated data
+    dataToUpdate['name'] = name;
+    }
+
+
+    //NEW
+    if(req.body.dateAdded) {
+    dateAdded = req.body.dateAdded;
+    // add to object that holds updated data
+    dataToUpdate['dateAdded'] = dateAdded;
     }
 
     // if(req.body.pageURL) {
@@ -257,61 +273,6 @@ router.post('/api/update/:id', function(req, res){
       return res.json(jsonData);
 
     })
-
-})
-
-
-// this route gets called whenever Twilio receives a message
-router.post('/twilio-callback', function(req,res){
-
-  // there's lots contained in the body
-  console.log(req.body);
-  // the actual message is contained in req.body.Body
-  var incomingMsg = req.body.Body;
-
-  //incoming messages look like:
-  //'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
-
-
-  var msgArray = incomingMsg.split(',');
-  //msg Array --> [Rain is wet, This morning it was gross outside, Having ice cream, tag1.tag2.tag3]
-  var til = msgArray[0];
-  var context = msgArray[1];
-  var bestPartDay = msgArray[2];
-  var tags = msgArray[3].split('.');
-
-
-  //now let's save to our database
-  var recordObj = {
-    til: til,
-    context: context,
-    // tags: req.body.tags.split(','),
-    bestPartDay: bestPartDay,
-    tags: tags
-    // pageURL: req.body.pageURL,
-  }
-
-  var record = new Record(recordObj)
-
-  record.save(function(err,data){
-    // set up the twilio response
-    var twilioResp = new twilio.TwimlResponse();
-    if(err){
-      // respond to user
-      twilioResp.sms('Oops! We couldn\'t save your lesson! --> ' + incomingMsg);
-      // respond to twilio
-      res.set('Content-Type', 'text/xml');
-      res.send(twilioResp.toString());      
-    }
-    else {
-      // respond to user
-      twilioResp.sms('Successfully saved your lesson! --> ' + incomingMsg);
-      // respond to twilio
-      res.set('Content-Type', 'text/xml');
-      res.send(twilioResp.toString());     
-    }
-  })
-
 
 })
 

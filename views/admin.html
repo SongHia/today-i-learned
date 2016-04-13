@@ -4,12 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>ADMIN</title>
     <!-- Custom Font - Change 'Muli' to the font you want -->
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
     <!-- JQUERY UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -26,23 +28,33 @@
 <body>
     <div class="header">
         <div class="container">
-            <ul class="nav">
-                <li><a href="/home">Home</a></li>
-                <li><a href="/admin">Admin</a></li>
-                <li><a href="/archive">Archive</a></li>
-            </ul>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/archive">Archive</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="container">
-        <div class="main">
-            <h1>Admin</h1>
+        <div class="row">
+            <div class="col-md-12 archive-display">
+                <div class="main">
+                    <h1>ADMIN</h1>
+                </div>
+            </div>
         </div>
-    </div>
+    </div> 
     
+    <!-- Archive -->
     <div class="container">
-    <div class="row" id="record-holder"></div>
+    <div class="row" id="all-records"></div>
     </div>
+
+
     <!-- Edit Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -74,14 +86,21 @@
                         <div class="form-group">
                             <label for="tags" class="col-sm-2 control-label">Tags</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="edit-tags" placeholder="Tags (separated by comma)" name="tags" required>
+                                <input type="text" class="form-control" id="edit-tags" placeholder="Tags (separated by comma)" name="tags">
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="dateAdded" class="col-sm-2 control-label">Date Added</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="edit-dateAdded" placeholder="date Added" name="dateAdded" required>
+                                <input type="text" class="form-control" id="edit-dateAdded" placeholder="date added" name="dateAdded" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="edit-name" placeholder="name" name="name">
                             </div>
                         </div>
 
@@ -104,11 +123,17 @@
     </div>
 <!-- Edit Modal Fin -->
     <div class="push"></div>
+
     <div class="footer">
         <div class="container">
-            <h5>&copy; <a href="http://songhia.com">Zero Co. 2015</a> <img src="img/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif"></h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>&copy; <a href="http://songhia.com">Zero Co. 2015</a> <img src="img/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif"></h5>
+                </div>
+            </div>
         </div>
     </div>
+
 </body>
 <!-- JQuery script -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -119,14 +144,16 @@
 <script type="text/javascript">
 $("form").validate({});
 </script>
-<!--JQuery UI JS -->
- <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!--JQuery UI JS NEW FOR CALENDAR PICKER-->
+<!--  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
  <script>
   $(function() {
     $( "#edit-dateAdded" ).datepicker();
   });
-</script>
+</script> -->
 <!-- CUSTOM JS -->
 <script src="js/admin.js"></script>
+<!-- MOMENT JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>script
 
 </html>

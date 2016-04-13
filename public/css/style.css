@@ -17,72 +17,22 @@ body {
     background-size: cover;
 }
 
-
-/*.randbg {*/
-
-
-/*  background: url('../img/10.gif') no-repeat center center fixed;
-  background: url('https://media2.giphy.com/media/wy63WPXSamvFC/giphy.gif') no-repeat center center fixed;*/
-
-
-/*  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  }*/
-
-
-/*  .randbg.bg1 {
-  background-image: url('../img/1.gif');
-  }
-  .randbg.bg2 {
-  background-image: url('../img/2.gif');
-  }
-  .randbg.bg3 {
-  background-image: url('../img/3.gif');
-  }
-  .randbg.bg4 {
-  background-image: url('../img/4.gif');
-  }
-  .randbg.bg5 {
-  background-image: url('../img/5.gif');
-  }
-  .randbg.bg6 {
-  background-image: url('../img/6.gif');
-  }
-  .randbg.bg7 {
-  background-image: url('../img/7.gif');
-  }
-  .randbg.bg8 {
-  background-image: url('../img/8.gif');
-  }
-  .randbg.bg9 {
-  background-image: url('../img/9.gif');
-  }
-  .randbg.bg10 {
-  background-image: url('../img/10.gif');
-  }*/
-
-body h1 {
-    text-shadow: 2px 2px #000;
-}
-
-body h2 {
-    text-shadow: 2px 2px #000;
-}
-
-body h3 {
+body h1, h2, h3, h4{
     text-shadow: 2px 2px #000;
 }
 
 label {
     color: #fff;
+    text-shadow: 2px 2px #000;
+}
+
+.main h5 {
+    color: #000;
 }
 
 a {
     text-transform: uppercase;
     text-decoration: none;
-    /*    letter-spacing: 2px;*/
     font-size: 15px;
     padding: 12px;
     color: #fff;
@@ -105,15 +55,16 @@ a:hover {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     display: inline-block;
-    /*  margin:0 10px 0 10px;*/
     text-transform: uppercase;
+/*        text-shadow: 2px 2px #000;*/
 }
 
 .main {
-    background-color: #fff;
+    /*background-color: #fff;*/
     margin: 0 auto;
     margin-bottom: 10px;
     padding: 5px;
+    background-color: #0FB8E4;
 }
 
 .giphy img {
@@ -136,23 +87,6 @@ a:hover {
     position: relative;
     text-align: left;
 }
-
-
-/*.twilio {
-  background-color: #0FB8E4;
-  color: #fff;
-  position: fixed;
-  bottom: 0;
-  padding-bottom: 70px;
-  width: 100%;
-  text-align: center;
-}*/
-
-
-/*.twilio h5 {
-  text-transform: uppercase;
-}
-*/
 
 .modal-header h4 {
     font-family: 'Cooper Hewitt', sans-serif;
@@ -179,10 +113,7 @@ a:hover {
     text-align: left;
 }
 
-/*.footer a {
-    color: #4ECDC4;
-}
-*/
+
 .edit-button {
     background-color: #fff;
     color: #0F7ADA;
@@ -192,7 +123,53 @@ a:hover {
     color: #0F7ADA;
 }
 
+/*makes it stand out*/
 .displayDate {
     /*   font-size:50px;*/
     color: #0F7ADA;
+}
+
+/*.displayTil {
+    color: #0F7ADA;
+}*/
+
+
+
+.archive-display {
+  padding: 10px;
+  background-color:rgba(245,245,245,0.2);
+}
+
+.archive-display h2 {
+  text-transform: uppercase;
+}
+
+/* from http://css3buttongenerator.com/ */
+
+.success-btn {
+  background: #4ECDC4;
+  background-image: -webkit-linear-gradient(top, #4ECDC4, #4ECDC4);
+  background-image: -moz-linear-gradient(top, #4ECDC4, #4ECDC4);
+  background-image: -ms-linear-gradient(top, #4ECDC4, #4ECDC4);
+  background-image: -o-linear-gradient(top, #4ECDC4, #4ECDC4);
+  background-image: linear-gradient(to bottom, #4ECDC4, #4ECDC4);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 2px;
+  font-family: Helvetica, sans-serif;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  display: inline;
+}
+
+.success-btn:hover {
+  background: #0FB8E4;
+  background-image: -webkit-linear-gradient(top, #0FB8E4, #0FB8E4);
+  background-image: -moz-linear-gradient(top, #0FB8E4, #0FB8E4);
+  background-image: -ms-linear-gradient(top, #0FB8E4, #0FB8E4);
+  background-image: -o-linear-gradient(top, #0FB8E4, #0FB8E4);
+  background-image: linear-gradient(to bottom, #0FB8E4, #0FB8E4);
+  text-decoration: none;
 }
