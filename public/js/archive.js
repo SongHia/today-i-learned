@@ -162,4 +162,47 @@ function searchGiphy() {
 
 }
 
+//NEW
+  $("#record-display").swipe( {
+
+    //Generic swipe handler for all directions
+    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+
+      console.log("got swipe first thing");
+      //Generate random number
+      // var randNum = Math.floor(Math.random() * tabletop.data().length);
+      if (direction == "right") {
+        swiperightAdvice();
+
+      }
+      if (direction == "left") {
+        swipeleftAdvice();
+      }
+    },
+  });
+
+  function swiperightAdvice() {
+    // console.log(randNum);
+    $("#record-display").removeClass().addClass('animated slideOutRight').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+      $(this).removeClass();
+      $(this).html.addClass('animated slideInLeft')
+    });
+    console.log("swipe right");
+    renderDisplay();
+
+  };
+
+  function swipeleftAdvice() {
+    // console.log(randNum);
+    $("#record-display").removeClass().addClass('animated slideOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+      $(this).removeClass();
+      $(this).addClass('animated slideInRight')
+    });
+    console.log("swiped left");
+    renderDisplay();
+  };
+
+
+
+
 window.addEventListener('load', init())
