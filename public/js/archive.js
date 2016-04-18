@@ -163,44 +163,51 @@ function searchGiphy() {
 }
 
 //NEW
-  $("#record-display").swipe( {
+$("#record-display").swipe({
 
     //Generic swipe handler for all directions
-    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+    swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
 
-      console.log("got swipe first thing");
-      //Generate random number
-      // var randNum = Math.floor(Math.random() * tabletop.data().length);
-      if (direction == "right") {
-        swiperightAdvice();
+        console.log("got swipe first thing");
+        //Generate random number
+        // var randNum = Math.floor(Math.random() * tabletop.data().length);
 
-      }
-      if (direction == "left") {
-        swipeleftAdvice();
-      }
+        if (direction == "right") {
+            swiperightAdvice();
+
+        }
+        if (direction == "left") {
+            swipeleftAdvice();
+        }
     },
-  });
+});
 
-  function swiperightAdvice() {
+function swiperightAdvice() {
     // console.log(randNum);
-    $("#record-display").removeClass().addClass('animated slideOutRight').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-      $(this).removeClass();
-      $(this).html.addClass('animated slideInLeft')
+    $("#record-display").removeClass().addClass('animated slideOutRight').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        $(this).removeClass();
+        // $(this).html(tabletop.data()[randNum].Advice).addClass('animated slideInLeft')
+
+        $(this).html.addClass('animated slideInLeft')
     });
     console.log("swipe right");
     renderDisplay();
 
-  };
+};
 
-  function swipeleftAdvice() {
+function swipeleftAdvice() {
     // console.log(randNum);
-    $("#record-display").removeClass().addClass('animated slideOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-      $(this).removeClass();
-      $(this).addClass('animated slideInRight')
+    $("#record-display").removeClass().addClass('animated slideOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        $(this).removeClass();
+        // $(this).html(htmlToAdd).addClass('animated slideInRight')
+        $(this).addClass('animated slideInRight')
     });
     console.log("swiped left");
     renderDisplay();
-  };
+};
+
+
+
 
 
 
