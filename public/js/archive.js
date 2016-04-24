@@ -37,7 +37,8 @@ function renderDisplay() {
                     '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
                     '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
                     '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
-                    '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
+                    // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
+                    '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
                     '</div>';
             } else {
                 var htmlToAdd = '<div class="col-md-12">' +
@@ -48,7 +49,8 @@ function renderDisplay() {
                     '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
                     // '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
                     '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
-                    '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
+                    // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
+                    '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
                     '</div>';
             }
             jQuery("#record-display").append(htmlToAdd); //adds the entry to the page
@@ -75,7 +77,8 @@ function newEntry() {
             '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
             '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
             '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
-            '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
+            // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
+            '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
             '</div>';
     } else {
         var htmlToAdd = '<div class="col-md-12">' +
@@ -86,7 +89,8 @@ function newEntry() {
             '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
             // '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
             '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
-            '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
+            // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
+            '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
             '</div>';
     }
     jQuery("#record-display").append(htmlToAdd); //adds the entry to the page
@@ -154,51 +158,58 @@ function searchGiphy(searchTerm) {
             // console.log("final searchTerm: " + searchTerm);
             // console.log("giphy url: " + i.url);
             // console.log("giphy image url: " + i.images.original.url);
+
+        //displays search term
+        // jQuery('#searchterm-display').empty();
+        // var htmlToAdd = '<div class="col-md-12">' +
+        //  '<h4>This gif found with: ' + searchTerm + '</h4>' +
+        // '</div>';
+        // jQuery("#searchterm-display").append(htmlToAdd); //adds the entry to the page
         }
     })
 }
 
-//NEW
-$("#record-display").swipe({
-    //Generic swipe handler for all directions
-    swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-        console.log("swip recognition");
-        //Generate random number
-        // var randNum = Math.floor(Math.random() * tabletop.data().length);
+// //NEW
+// $("#record-display").swipe({
+//     //Generic swipe handler for all directions
+//     swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+//         console.log("swip recognition");
+//         //Generate random number
+//         // var randNum = Math.floor(Math.random() * tabletop.data().length);
 
-        if (direction == "right") {
-            swiperightAdvice();
+//         if (direction == "right") {
+//             swiperightAdvice();
 
-        }
-        if (direction == "left") {
-            swipeleftAdvice();
-        }
-    },
-});
+//         }
+//         if (direction == "left") {
+//             swipeleftAdvice();
+//         }
+//     },
+// });
 
-function swiperightAdvice() {
-    // console.log(randNum);
-    $("#record-display").removeClass().addClass('animated slideOutRight').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-        $(this).removeClass();
-        // $(this).html(tabletop.data()[randNum].Advice).addClass('animated slideInLeft')
+// function swiperightAdvice() {
+//     // console.log(randNum);
+//     $("#record-display").removeClass().addClass('animated slideOutRight').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+//         $(this).removeClass();
+//         // $(this).html(tabletop.data()[randNum].Advice).addClass('animated slideInLeft')
 
-        $(this).html.addClass('animated slideInLeft')
-    });
-    console.log("swiped right");
-    // renderDisplay();
-    newEntry();
-};
+//         $(this).html.addClass('animated slideInLeft')
+//     });
+//     console.log("swiped right");
+//     // renderDisplay();
+//     newEntry();
+// };
 
-function swipeleftAdvice() {
-    // console.log(randNum);
-    $("#record-display").removeClass().addClass('animated slideOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-        $(this).removeClass();
-        // $(this).html(htmlToAdd).addClass('animated slideInRight')
-        $(this).addClass('animated slideInRight')
-    });
-    console.log("swiped left");
-    // renderDisplay();
-    newEntry();
-};
+// function swipeleftAdvice() {
+//     // console.log(randNum);
+//     $("#record-display").removeClass().addClass('animated slideOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+//         $(this).removeClass();
+//         // $(this).html(htmlToAdd).addClass('animated slideInRight')
+//         $(this).addClass('animated slideInRight')
+//     });
+//     console.log("swiped left");
+//     // renderDisplay();
+//     newEntry();
+// };
 
 window.addEventListener('load', init())
