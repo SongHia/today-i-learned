@@ -94,7 +94,7 @@ function newEntry() {
 
     //for keyword analysis + giphy search (in progress)
     tilText = i.til + " " + i.context + " " + i.bestPartDay + " " + i.tags;
-    console.log("tilText: " + tilText);
+    // console.log("tilText: " + tilText);
     findTag(); //find based on tag
 }
 
@@ -113,7 +113,6 @@ function findTag() {
 }
 
 function findKeyword() {
-    console.log("tilText: " + tilText);
     params = {
         // text: encodeURI(tilText),
         text: tilText,
@@ -135,9 +134,9 @@ function findKeyword() {
         console.log("keywordsArray :" + keywordsArray);
         var j = keywordsArray[Math.floor(Math.random() * keywordsArray.length)];
         searchTerm = j;
+        console.log("search term from Alchemy keyword: " + j)
+        searchGiphy(searchTerm);
     });
-    console.log("search term from Alchemy keyword: " + j)
-    searchGiphy(searchTerm);
 }
 
 function searchGiphy(searchTerm) {
@@ -163,8 +162,7 @@ function searchGiphy(searchTerm) {
 $("#record-display").swipe({
     //Generic swipe handler for all directions
     swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-
-        console.log("got swipe first thing");
+        console.log("swip recognition");
         //Generate random number
         // var randNum = Math.floor(Math.random() * tabletop.data().length);
 
@@ -186,7 +184,7 @@ function swiperightAdvice() {
 
         $(this).html.addClass('animated slideInLeft')
     });
-    console.log("swipe right");
+    console.log("swiped right");
     // renderDisplay();
     newEntry();
 };
