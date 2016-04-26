@@ -147,22 +147,22 @@ function getEmotion(params) {
     });
 }
 
-http: //www.alchemyapi.com/api/sentiment/textc.html
-    function getSentiment(params) {
-        var sentimentArray = [];
-        url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: params,
-            success: function(data) {
-                sentimentArray.push(data.docSentiment.type);
-                console.log("sentiment " + sentimentArray);
-                console.log("sentiment score " + data.docSentiment.score);
-            },
-            dataType: 'json'
-        });
-    }
+// http: //www.alchemyapi.com/api/sentiment/textc.html
+function getSentiment(params) {
+    var sentimentArray = [];
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            sentimentArray.push(data.docSentiment.type);
+            console.log("sentiment " + sentimentArray);
+            console.log("sentiment score " + data.docSentiment.score);
+        },
+        dataType: 'json'
+    });
+}
 
 //doesn't really work
 // function getEntities(params){

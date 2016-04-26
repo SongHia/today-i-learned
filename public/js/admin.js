@@ -1,98 +1,61 @@
-//Giphy Endpoints
-var api = "https://api.giphy.com";
-var randomGif = "/v1/gifs/random?";
-var trendingGif = "/v1/gifs/trending?";
-var apiKey = "&api_key=dc6zaTOxFJmzC";
+var tilRecord; //for TIL API object
 
 function init() {
-    renderAll();
-    // renderGiphy();
+    getTILJSON();
 }
 
-// get Record JSON from /api/get
-function renderAll() {
-    // first, make sure the #record-holder is empty
-    jQuery('#all-records').empty();
-
+function getTILJSON() {
     jQuery.ajax({
         url: '/api/get',
         dataType: 'json',
         success: function(response) {
-            var record = response.record;
-            for (var i = 0; i < record.length; i++) {
-                var date = new Date(record[i].dateAdded); // turn string into a date object
-                var htmlToAdd = '<div class="col-md-12 archive-display">' +
-                    '<h1><span class ="dateConverted">' + date.toDateString() + '</span></h1>' + //translated date
-                    '<h1><span class ="dateAdded">' + record[i].dateAdded + '</span></h1>' + //orginal date record
-                    '<h1>Today I learned: <span class="til">' + record[i].til + '</span></h1>' +
-                    '<ul>' +
-                    '<li>Context: <span class="context">' + record[i].context + '</span></li>' +
-                    '<li>Best Parts Of The Day: <span class="bestPartDay">' + record[i].bestPartDay + '</span></li>' +
-                    '<li>Tags: <span class="tags">' + record[i].tags + '</span></li>' +
-                    '<li>Name: <span class="name">' + record[i].name + '</span></li>' +
-                    '<li class="hide">ID: <span class="id">' + record[i]._id + '</span></li>' +
-                    '</ul>' +
-                    '<button type="button" class="edit-button" id="' + record[i]._id + '" onclick="deleteRecord(event)">Delete Record</button>' +
-                    '<button type="button" class="edit-button" data-toggle="modal" data-target="#editModal"">Edit Record</button>' +
-                    '</div>';
-                jQuery("#all-records").append(htmlToAdd);
-                // var ogDate = record[i].dateAdded;
-                // var translatedDate = date.toDateString();
-                // console.log("original date: " + ogDate);
-                // console.log("var og date: " + typeof ogDate);
-                // console.log("translated date: " + date.toString());
-                // console.log("var translated date: " + typeof translatedDate);
-            }
+            tilRecord = response.record;
+            loadAll();
         }
     })
 }
 
-// new GET GIPHY JSON FROM API
-function renderGiphy() {
-    jQuery.ajax({
-        url: api + trendingGif + apiKey, //trending gif
-        dataType: 'json',
-        success: function(response) {
-            var data = response.data; //stores the data object
-            var i = data[Math.floor(Math.random() * data.length)]; //randomly picks data object from current trending gifs
-            $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
-        }
-    })
-
+function loadAll() {
+    jQuery('#all-records').empty();
+    for (var i = 0; i < tilRecord.length; i++) {
+        var date = new Date(tilRecord[i].dateAdded); // turn string into a date object
+        var htmlToAdd = '<div class="col-md-12 archive-display">' +
+            '<h1><span class ="dateConverted">' + date.toDateString() + '</span></h1>' + //translated date
+            '<h1><span class ="dateAdded">' + tilRecord[i].dateAdded + '</span></h1>' + //orginal date record
+            '<h1>Today I learned: <span class="til">' + tilRecord[i].til + '</span></h1>' +
+            '<ul>' +
+            '<li>Context: <span class="context">' + tilRecord[i].context + '</span></li>' +
+            '<li>Best Parts Of The Day: <span class="bestPartDay">' + tilRecord[i].bestPartDay + '</span></li>' +
+            '<li>Tags: <span class="tags">' + tilRecord[i].tags + '</span></li>' +
+            '<li>Name: <span class="name">' + tilRecord[i].name + '</span></li>' +
+            '<li class="hide">ID: <span class="id">' + tilRecord[i]._id + '</span></li>' +
+            '</ul>' +
+            '<button type="button" class="edit-button" id="' + tilRecord[i]._id + '" onclick="deleteRecord(event)">Delete Record</button>' +
+            '<button type="button" class="edit-button" data-toggle="modal" data-target="#editModal"">Edit Record</button>' +
+            '</div>';
+        jQuery("#all-records").append(htmlToAdd);
+    }
 }
 
 //GETS THE DATA FROM THE RENDERED HTML ENTRY
 jQuery('#editModal').on('show.bs.modal', function(e) {
     // let's get access to what we just clicked on
     var clickedButton = e.relatedTarget;
-    // now let's get its parent
     var parent = jQuery(clickedButton).parent();
 
-    //GETS
-    // now, let's get the values of the records that we're wanting to edit
-    // we do this by targeting specific spans within the parent and pulling out the text
+    //get values of records to edit by targeting spans within parent and grabbing text
     var til = $(parent).find('.til').text();
     var context = $(parent).find('.context').text();
     var bestPartDay = $(parent).find('.bestPartDay').text();
     var tags = $(parent).find('.tags').text();
     var name = $(parent).find('.name').text();
     var id = $(parent).find('.id').text();
-
-    //new
     var dateAdded = $(parent).find('.dateAdded').text(); //original
-    var dateConverted = $(parent).find('.dateConverted').text(); //ISO 8601
+    // var dateConverted = $(parent).find('.dateConverted').text(); //ISO 8601
 
     console.log("modal dateAdded raw: " + dateAdded);
-    // console.log("modal dateConverted: " + dateConverted);
-
-    // var now = moment();
-    // console.log("current moment: " + now)
-    // var conversion = moment(now, "MM-DD-YYYY");
-    // console.log("conversion moment: " + conversion);
-
 
     //POPULATES IN FORM FROM ABOVE VARIABLES
-    // now let's set the value of the edit fields to those values
     jQuery("#edit-date").val(dateAdded);
     jQuery("#edit-til").val(til);
     jQuery("#edit-context").val(context);
@@ -101,7 +64,6 @@ jQuery('#editModal').on('show.bs.modal', function(e) {
     jQuery("#edit-name").val(name);
     jQuery("#edit-id").val(id);
 
-    //HERE
     jQuery("#edit-dateAdded").val(dateAdded); //set the field in the modal
 
 })
@@ -115,14 +77,13 @@ function deleteRecord(event) {
         dataType: 'json',
         success: function(response) {
             // now, let's re-render the records
-            renderAll();
+            getTILJSON();
         }
     })
     event.preventDefault();
 }
 
 //POST EVENT
-// when the form is submitted (with a new record edit), the below runs
 jQuery("#editForm").submit(function(e) {
 
     // first, let's pull out all the values
@@ -132,39 +93,27 @@ jQuery("#editForm").submit(function(e) {
     var tags = jQuery("#edit-tags").val();
     var name = jQuery("#edit-name").val(); //new
     var id = jQuery("#edit-id").val();
-    // var dateAdded = jQuery("#edit-dateAdded").val(); //working
-    // console.log("dateAdded post: " + dateAdded);
-
     var stringDate = jQuery("#edit-dateAdded").val();
     var dateAdded = new Date(stringDate) // Mon Sep 19 2011 08:49:21 GMT-0700 (PDT)
     console.log("date object: " + dateAdded)
-
-    //test
-    // var dateGrab = jQuery("#edit-dateAdded").val(); // Mon Sep 19 2011 08:49:21 GMT-0700 (PDT)
-    // var dateAdded = moment(dateGrab, 'DD/MM/YYYY', true).format()
-
 
     // POST the data from above to our API create route
     jQuery.ajax({
         url: '/api/update/' + id,
         dataType: 'json',
         type: 'POST',
-        // we send the data in a data object (with key/value pairs)
         data: {
-            // date : date,
             til: til,
             context: context,
             bestPartDay: bestPartDay,
             tags: tags,
             name: name,
             dateAdded: dateAdded //new
-            // dateAdded: { type: Date, dateAdded }
         },
         success: function(response) {
             if (response.status == "OK") {
                 console.log("SUCCESS")
-                // console.log(response); // test for success
-                renderAll(); // re-render the records
+                getTILJSON(); // re-render the records
                 $('#editModal').modal('hide') // now, close the modal
                 jQuery("#editForm input").val(''); // now, clear the input fields
             } else {
@@ -176,7 +125,6 @@ jQuery("#editForm").submit(function(e) {
             console.error(err);
         }
     });
-
     // prevents the form from submitting normally
     e.preventDefault();
     return false;

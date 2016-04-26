@@ -1,4 +1,3 @@
-
 // GET routes
 // http://localhost:3000/api/get
 // http://localhost:3000/api/get/:id
@@ -86,9 +85,10 @@ router.post('/api/create', function(req, res){
     til: req.body.til,
     context: req.body.context,
     bestPartDay: req.body.bestPartDay,
-    name: req.body.name,
-    tags: req.body.tags.split(',')
+    // name: req.body.name,
+    // tags: req.body.tags.split(',')
     // pageURL: req.body.pageURL,
+
   }
 
   var record = new Record(recordObj);
@@ -110,7 +110,7 @@ router.post('/api/create', function(req, res){
 
     // return res.json(jsonData);
   
-    return res.redirect('/admin');
+    return res.redirect('/success');
   })
 })
 

@@ -1,215 +1,192 @@
-//Giphy Endpoints
-var api = "https://api.giphy.com";
-var randomGif = "/v1/gifs/random?";
-var trendingGif = "/v1/gifs/trending?";
-var searchGif = "/v1/gifs/search?";
-var query = "&q=";
-var apiKey = "&api_key=dc6zaTOxFJmzC";
+//API keys
+var giphyKey = "&api_key=dc6zaTOxFJmzC"; //Giphy
+var alchemyKey = "919a594d65f26f48b528c3e9c49a43c84474d294"; //Alchemy
+
+//objects
+var tilRecord; //for TIL API object
+var giphyRecord; //for Giphy search object
 
 //global variables
-var record;
-var tagArray; //for tag based gif search
 var tilText; //for keyword extratcted gif search
-var resultsArray = [];
 var searchTerm;
+var searchType;
+var resultsArray;
 
-
-//init function
 function init() {
-    renderDisplay();
+    getTILJSON();
 }
 
-function renderDisplay() {
-    jQuery('#record-display').empty();
+function getTILJSON() {
     jQuery.ajax({
         url: '/api/get',
         dataType: 'json',
         success: function(response) {
-            record = response.record;
-            var i = record[Math.floor(Math.random() * record.length)]; //random entry
-            var date = new Date(i.dateAdded); //turns the random entry's data into data object
-            if (i.name !== "" && i.name !== "undefined") { //checks for name and displays if available
-                var htmlToAdd = '<div class="col-md-12">' +
-                    '<h3><span class ="displayDate">' + date.toDateString() + '</span></h3>' + //convert date object to date
-                    '<h3><span class="displayTil">' + i.til + '</span></h3>' +
-                    '<h6>Context: <span class="displayContext">' + i.context + '</span></h6>' +
-                    '<h6>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h6>' +
-                    '<h6>Tags: <span class="tags">' + i.tags + '</span></h6>' +
-                    '<h6>Name: <span class="name">' + i.name + '</span></h6>' +
-                    '<h6 class="hide">ID: <span class="displayId">' + i._id + '</span></h6>' +
-                    // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
-                    '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
-                    '</div>';
-            } else {
-                var htmlToAdd = '<div class="col-md-12">' +
-                    '<h2><span class ="displayDate">' + date.toDateString() + '</span></h2>' +
-                    '<h2><span class="displayTil">' + i.til + '</span></h2>' +
-                    '<h4>Context: <span class="displayContext">' + i.context + '</span></h4>' +
-                    '<h4>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h4>' +
-                    '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
-                    // '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
-                    '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
-                    // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
-                    '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
-                    '</div>';
-            }
-            jQuery("#record-display").append(htmlToAdd); //adds the entry to the page
-            tagArray = i.tags; //creates an array of all tags in entry for giphy search
-
-            //for keyword analysis + giphy search (in progress)
-            tilText = i.til + " " + i.context + " " + i.bestPartDay + " " + i.tags;
-            findTag(); //find based on tag
+            tilRecord = response.record;
+            loadEntry();
         }
     })
 }
 
-//displays new entry via swiping left or right
-function newEntry() {
-    jQuery('#record-display').empty();
-    var i = record[Math.floor(Math.random() * record.length)]; //random entry
-    var date = new Date(i.dateAdded); //turns the random entry's data into data object
-    if (i.name !== "" && i.name !== "undefined") { //checks for name and displays if available
-        var htmlToAdd = '<div class="col-md-12">' +
-            '<h2><span class ="displayDate">' + date.toDateString() + '</span></h2>' + //convert date object to date
-            '<h2><span class="displayTil">' + i.til + '</span></h2>' +
-            '<h4>Context: <span class="displayContext">' + i.context + '</span></h4>' +
-            '<h4>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h4>' +
-            '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
-            '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
-            '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
-            // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
-            '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
-            '</div>';
-    } else {
-        var htmlToAdd = '<div class="col-md-12">' +
-            '<h2><span class ="displayDate">' + date.toDateString() + '</span></h2>' +
-            '<h2><span class="displayTil">' + i.til + '</span></h2>' +
-            '<h4>Context: <span class="displayContext">' + i.context + '</span></h4>' +
-            '<h4>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h4>' +
-            '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
-            // '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
-            '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
-            // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
-            '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
-            '</div>';
-    }
-    jQuery("#record-display").append(htmlToAdd); //adds the entry to the page
-    tagArray = i.tags; //creates an array of all tags in entry for giphy search
-
-    //for keyword analysis + giphy search (in progress)
-    tilText = i.til + " " + i.context + " " + i.bestPartDay + " " + i.tags;
-    // console.log("tilText: " + tilText);
-    findTag(); //find based on tag
+function loadEntry() {
+    jQuery("#record-display").empty(); //clear old entry
+    var i = tilRecord[Math.floor(Math.random() * tilRecord.length)]; //get random entry
+    var date = new Date(i.dateAdded); //convert entry date into a date object
+    var htmlToAdd = '<div class="col-md-12">' +
+        '<h2><span class ="displayDate">' + date.toDateString() + '</span></h2>' + //human readable date
+        '<h2><span class="displayTil">' + i.til + '</span></h2>' +
+        '<h4>Context: <span class="displayContext">' + i.context + '</span></h4>' +
+        '<h4>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h4>' +
+        '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
+        '</div>';
+    jQuery("#record-display").append(htmlToAdd); //add new entry
+    tilText = i.til + " " + i.context + " " + i.bestPartDay; //Alchemy input text
+    passAlchemy(tilText);
 }
 
-function findTag() {
-    var j = tagArray[Math.floor(Math.random() * tagArray.length)];
-    if (j !== "") {
-        searchTerm = j;
-        console.log("search term from tag: " + searchTerm);
-        searchGiphy(searchTerm);
-    } 
-    //if no tags found extract keyword from Alchemy API
-    else {
-        findKeyword();
-        // searchTerm = "time"; //default
-    }
-}
-
-function findKeyword() {
+function passAlchemy(tilText) {
+    console.log("characters sent: " + tilText.length);
     params = {
-        // text: encodeURI(tilText),
         text: tilText,
-        apikey: '919a594d65f26f48b528c3e9c49a43c84474d294',
+        apikey: alchemyKey,
         outputMode: 'json'
     }
-    //API ENDPOINT http://api.jquery.com/jquery.getjson/
-    //SAMPLE APPROACH - gets JSON of data from Alchemy API
-    //http://webtutsdepot.com/2009/11/28/how-to-read-json-with-javascript/
-    //Text document content (must be uri-argument encoded)
+    getKeywords(params);
+    // getConcepts(params);
+    // getTaxnonomy(params);
+    // getEmotion(params);
+    // getSentiment(params);
+}
 
-    url = 'https://access.alchemyapi.com/calls/text/TextGetRankedKeywords';
-    // url = 'http://access.alchemyapi.com/calls/text/TextGetRankedConcepts';
+function getKeywords(params) {
+    resultsArray = []; //clears array
+    searchType = "keywords";
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
 
-    $.getJSON(url, params, function(data) {
-        $.each(data.keywords, function(i, results) {
-            resultsArray.push(results.text);
-        })
-        console.log("resultsArray :" + resultsArray);
-        var j = resultsArray[Math.floor(Math.random() * resultsArray.length)];
-        searchTerm = j;
-        console.log("search term from Alchemy keyword: " + j)
-        searchGiphy(searchTerm);
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            $.each(data.keywords, function(i, results) {
+                resultsArray.push(results.text);
+            })
+            console.log("keywordArray: " + resultsArray);
+            var j = resultsArray[Math.floor(Math.random() * resultsArray.length)];
+            searchTerm = j;
+            console.log("search term from Alchemy keyword: " + j)
+            searchGiphy(resultsArray, searchTerm, searchType);
+        },
+        dataType: 'json'
     });
 }
 
-function searchGiphy(searchTerm) {
-    jQuery.ajax({
-        // url : api + trendingGif + apiKey, //trending gif old
-        url: api + searchGif + query + searchTerm + apiKey,
+//http://www.alchemyapi.com/api/concept/textc.html
+function getConcepts(params) {
+    resultsArray = []; //clears array
+    searchType = "concepts";
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            $.each(data.concepts, function(i, results) {
+                resultsArray.push(results.text);
+            })
+            console.log("concepts: " + resultsArray);
+            var j = resultsArray[Math.floor(Math.random() * resultsArray.length)];
+            searchTerm = j;
+            console.log("search term from Alchemy concept: " + j)
+            searchGiphy(resultsArray, searchTerm, searchType);
+        },
+        dataType: 'json'
+    });
+}
+
+function getTaxnonomy(params) {
+    resultsArray = [];
+    searchType = "taxonomies";
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            $.each(data.taxonomy, function(i, results) {
+                resultsArray.push(results.label);
+            })
+            console.log("taxonomies: " + resultsArray);
+            var j = resultsArray[Math.floor(Math.random() * resultsArray.length)];
+            searchTerm = j;
+            searchGiphy(resultsArray, searchTerm, searchType);
+        },
+        dataType: 'json'
+    });
+}
+
+//needs work
+function getEmotion(params) {
+    resultsArray = [];
+    searchType = "emotion scores";
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            console.log("anger score: " + data.docEmotions.anger);
+            console.log("disgust score: " + data.docEmotions.disgust);
+            console.log("fear score: " + data.docEmotions.fear);
+            console.log("joy score: " + data.docEmotions.joy);
+            console.log("sadness score: " + data.docEmotions.sadness);
+        },
+        dataType: 'json'
+    });
+}
+
+//needs work
+function getSentiment(params) {
+    var sentimentArray = [];
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            sentimentArray.push(data.docSentiment.type);
+            console.log("sentiment " + sentimentArray);
+            console.log("sentiment score " + data.docSentiment.score);
+        },
+        dataType: 'json'
+    });
+}
+
+function searchGiphy(resultsArray, searchTerm, searchType) {
+    var api = "https://api.giphy.com";
+    var searchGif = "/v1/gifs/search?";
+    var query = "&q=";
+    $.ajax({
+        url: api + searchGif + query + searchTerm + giphyKey,
         dataType: 'json',
         success: function(response) {
-
-            var data = response.data; //stores the data object
-            var i = data[Math.floor(Math.random() * data.length)]; //randomly picks data object from current trending gifs
-            // console.log(i.images.original.url); //checks the url property
-            $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
-            // $('randbg').css('background', 'url(' + i.images.original.url + ')' + 'no-repeat center center fixed'); //writes the url to css as bg image
-            // console.log("final searchTerm: " + searchTerm);
-            // console.log("giphy url: " + i.url);
-            // console.log("giphy image url: " + i.images.original.url);
-
-        //displays search term
-        // jQuery('#searchterm-display').empty();
-        // var htmlToAdd = '<div class="col-md-12">' +
-        //  '<h4>This gif found with: ' + searchTerm + '</h4>' +
-        // '</div>';
-        // jQuery("#searchterm-display").append(htmlToAdd); //adds the entry to the page
+            giphyRecord = response.data;
+            giphyBackground();
         }
     })
 }
 
-// //NEW
-// $("#record-display").swipe({
-//     //Generic swipe handler for all directions
-//     swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-//         console.log("swip recognition");
-//         //Generate random number
-//         // var randNum = Math.floor(Math.random() * tabletop.data().length);
+function giphyBackground() {
+    jQuery("#searchterm-display").empty();
+    var i = giphyRecord[Math.floor(Math.random() * giphyRecord.length)]; //random giphy from results
+    $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
+    loadAlchemy();    
+}
 
-//         if (direction == "right") {
-//             swiperightAdvice();
-
-//         }
-//         if (direction == "left") {
-//             swipeleftAdvice();
-//         }
-//     },
-// });
-
-// function swiperightAdvice() {
-//     // console.log(randNum);
-//     $("#record-display").removeClass().addClass('animated slideOutRight').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-//         $(this).removeClass();
-//         // $(this).html(tabletop.data()[randNum].Advice).addClass('animated slideInLeft')
-
-//         $(this).html.addClass('animated slideInLeft')
-//     });
-//     console.log("swiped right");
-//     // renderDisplay();
-//     newEntry();
-// };
-
-// function swipeleftAdvice() {
-//     // console.log(randNum);
-//     $("#record-display").removeClass().addClass('animated slideOutLeft').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-//         $(this).removeClass();
-//         // $(this).html(htmlToAdd).addClass('animated slideInRight')
-//         $(this).addClass('animated slideInRight')
-//     });
-//     console.log("swiped left");
-//     // renderDisplay();
-//     newEntry();
-// };
+function loadAlchemy() {
+    var htmlToAdd = '<div class="col-md-12">' +
+        '<h4>Alchemy found these ' + searchType + ": " + resultsArray + " and searched Giphy for " + searchTerm + '</h4>' +
+        '</div>';
+    jQuery("#searchterm-display").append(htmlToAdd); //adds entry information
+}
 
 window.addEventListener('load', init())

@@ -117,9 +117,14 @@ a:hover {
     text-transform: uppercase;
     color: #fff;
     font-family: 'Cooper Hewitt', sans-serif;
-    text-align: left;
+    text-align: center;
+    margin: 9 auto;
 }
 
+.footer img {
+  margin: 0 auto;
+  display: block;
+}
 
 .edit-button {
     background-color: #fff;
