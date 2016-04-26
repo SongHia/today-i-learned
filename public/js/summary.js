@@ -77,7 +77,7 @@ function passAlchemy() {
 //http://www.alchemyapi.com/api/keyword/textc.html
 function getKeywords(params) {
     var keywordsArray = [];
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
     $.ajax({
         type: "POST",
         url: url,
@@ -95,7 +95,7 @@ function getKeywords(params) {
 //http://www.alchemyapi.com/api/concept/textc.html
 function getConcepts(params) {
     var conceptsArray = [];
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
     $.ajax({
         type: "POST",
         url: url,
@@ -113,7 +113,7 @@ function getConcepts(params) {
 //http://www.alchemyapi.com/api/taxonomy_calls/text.html
 function getTaxnonomy(params) {
     var taxonomyArray = [];
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
     $.ajax({
         type: "POST",
         url: url,
@@ -131,7 +131,7 @@ function getTaxnonomy(params) {
 //http://www.alchemyapi.com/api/text-api-0
 function getEmotion(params) {
     var emotionArray = [];
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
     $.ajax({
         type: "POST",
         url: url,
@@ -150,7 +150,7 @@ function getEmotion(params) {
 // http: //www.alchemyapi.com/api/sentiment/textc.html
 function getSentiment(params) {
     var sentimentArray = [];
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
     $.ajax({
         type: "POST",
         url: url,
@@ -167,7 +167,7 @@ function getSentiment(params) {
 //doesn't really work
 // function getEntities(params){
 //     var entitiesArray =[];
-//     url = 'http://access.alchemyapi.com/calls/text/TextGetRankedNamedEntities';
+//     url = 'https://access.alchemyapi.com/calls/text/TextGetRankedNamedEntities';
 //     $.getJSON(url, params, function(data) {
 //         $.each(data.entities, function(i, entities) {
 //             // console.log("entity :" + entities.text + " count: " + entities.count);

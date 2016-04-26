@@ -84,7 +84,7 @@ function getKeywords(params) {
 function getConcepts(params) {
     resultsArray = []; //clears array
     searchType = "concepts";
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
     $.ajax({
         type: "POST",
         url: url,
@@ -106,7 +106,7 @@ function getConcepts(params) {
 function getTaxnonomy(params) {
     resultsArray = [];
     searchType = "taxonomies";
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
     $.ajax({
         type: "POST",
         url: url,
@@ -128,7 +128,7 @@ function getTaxnonomy(params) {
 function getEmotion(params) {
     resultsArray = [];
     searchType = "emotion scores";
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
     $.ajax({
         type: "POST",
         url: url,
@@ -147,7 +147,7 @@ function getEmotion(params) {
 //needs work
 function getSentiment(params) {
     var sentimentArray = [];
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
     $.ajax({
         type: "POST",
         url: url,
