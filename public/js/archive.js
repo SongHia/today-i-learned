@@ -60,7 +60,7 @@ function passAlchemy(tilText) {
 function getKeywords(params) {
     resultsArray = []; //clears array
     searchType = "keywords";
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
 
     $.ajax({
         type: "POST",
