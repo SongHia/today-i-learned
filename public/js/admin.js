@@ -6,7 +6,7 @@ var apiKey = "&api_key=dc6zaTOxFJmzC";
 
 function init() {
     renderAll();
-    renderGiphy();
+    // renderGiphy();
 }
 
 // get Record JSON from /api/get

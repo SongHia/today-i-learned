@@ -1,16 +1,14 @@
 //Giphy Endpoints
 var api = "https://api.giphy.com";
-var randomGif = "/v1/gifs/random?";
 var trendingGif = "/v1/gifs/trending?";
 var apiKey = "&api_key=dc6zaTOxFJmzC";
 
 var tilText = []; //for keyword extratcted gif search
-var keywordsArray = [];
+
 
 function init() {
     renderAll();
     renderGiphy();
-
 }
 
 // get Record JSON from /api/get
@@ -24,28 +22,24 @@ function renderAll() {
         success: function(response) {
             var record = response.record;
             for (var i = 0; i < record.length; i++) {
-                var date = new Date(record[i].dateAdded); // turn string into a date object
-                var htmlToAdd = '<div class="col-md-12 archive-display">' +
-                    '<h1><span class ="dateConverted">' + date.toDateString() + '</span></h1>' + //translated date
-                    // '<h1><span class ="dateAdded">' + record[i].dateAdded + '</span></h1>' + //orginal date record
-                    '<h1>Today I learned: <span class="til">' + record[i].til + '</span></h1>' +
-                    '<ul>' +
-                    '<li>Context: <span class="context">' + record[i].context + '</span></li>' +
-                    '<li>Best Parts Of The Day: <span class="bestPartDay">' + record[i].bestPartDay + '</span></li>' +
-                    '<li>Tags: <span class="tags">' + record[i].tags + '</span></li>' +
-                    '<li>Name: <span class="name">' + record[i].name + '</span></li>' +
-                    '<li class="hide">ID: <span class="id">' + record[i]._id + '</span></li>' +
-                    '</ul>' +
-                    // '<button type="button" class="edit-button" id="' + record[i]._id + '" onclick="deleteRecord(event)">Delete Record</button>' +
-                    // '<button type="button" class="edit-button" data-toggle="modal" data-target="#editModal"">Edit Record</button>' +
-                    '</div>';
-                jQuery("#all-records").append(htmlToAdd);
-                //for keyword analysis + giphy search (in progress)
+                // var date = new Date(record[i].dateAdded); // turn string into a date object
+                // var htmlToAdd = '<div class="col-md-12 archive-display">' +
+                //     '<h1><span class ="dateConverted">' + date.toDateString() + '</span></h1>' + //translated date
+                //     '<h1>Today I learned: <span class="til">' + record[i].til + '</span></h1>' +
+                //     '<ul>' +
+                //     '<li>Context: <span class="context">' + record[i].context + '</span></li>' +
+                //     '<li>Best Parts Of The Day: <span class="bestPartDay">' + record[i].bestPartDay + '</span></li>' +
+                //     '<li>Tags: <span class="tags">' + record[i].tags + '</span></li>' +
+                //     '<li>Name: <span class="name">' + record[i].name + '</span></li>' +
+                //     '<li class="hide">ID: <span class="id">' + record[i]._id + '</span></li>' +
+                //     '</ul>' +
+                //     '</div>';
+                // jQuery("#all-records").append(htmlToAdd);
+                //this is the input
                 tilText.push(record[i].til);
-                // console.log("all tilText: " + tilText);
-                // findKeyword(tilText);
             }
-            convert(tilText);
+            passAlchemy(tilText);
+
         }
     })
 }
@@ -64,36 +58,97 @@ function renderGiphy() {
 
 }
 
-function convert(tilText) {
-    console.log("length " + tilText.length);
-    tilText.toString();
-    console.log(tilText);
-    findKeyword(tilText);
+function passAlchemy() {
+    var tilTextString = String(tilText); //converts obj to string
+    var charSent = 7500; //max that can be sent 18,969 char with spaces currently
+    var trimmedString = tilTextString.substring(0, charSent);
+    console.log("characters sent: " + charSent);
+    params = {
+        text: trimmedString,
+        apikey: '919a594d65f26f48b528c3e9c49a43c84474d294',
+        outputMode: 'json'
+    }
+    getKeywords(params);
+    // getConcepts(params);
+    // getTaxnonomy(params);
+    // getEmotion(params);
+    // getSentiment(params);
+    // getEntities(params); doesn't work
 }
 
-function findKeyword(tilText) {
-    params = {
-            // text: encodeURI(tilText),
-            text: tilText,
-            apikey: '919a594d65f26f48b528c3e9c49a43c84474d294',
-            outputMode: 'json'
-        }
-        //API ENDPOINT http://api.jquery.com/jquery.getjson/
-        //SAMPLE APPROACH - gets JSON of data from Alchemy API
-        //http://webtutsdepot.com/2009/11/28/how-to-read-json-with-javascript/
-        //Text document content (must be uri-argument encoded)
 
-    url = 'https://access.alchemyapi.com/calls/text/TextGetRankedKeywords';
-    // url = 'http://access.alchemyapi.com/calls/text/TextGetRankedConcepts';
-
+//using jQuery to GET JSON: http://webtutsdepot.com/2009/11/28/how-to-read-json-with-javascript/
+function getKeywords() {
+    var keywordsArray = [];
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
     $.getJSON(url, params, function(data) {
         $.each(data.keywords, function(i, results) {
             keywordsArray.push(results.text);
         })
-        console.log("keywordsArray :" + keywordsArray);
-        var j = keywordsArray[Math.floor(Math.random() * keywordsArray.length)];
-        console.log("Alchemy keywords: " + j)
-        // searchGiphy(searchTerm);
+        console.log("keywords: " + keywordsArray);
     });
 }
+
+//http://www.alchemyapi.com/api/concept/textc.html
+function getConcepts(params) {
+    var conceptsArray = [];
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
+    $.getJSON(url, params, function(data) {
+        $.each(data.concepts, function(i, results) {
+            conceptsArray.push(results.text);
+        })
+        console.log("concepts: " + conceptsArray);
+    });
+}
+
+function getTaxnonomy(params) {
+    var taxonomyArray = [];
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
+    $.getJSON(url, params, function(data) {
+        $.each(data.taxonomy, function(i, results) {
+            taxonomyArray.push(results.label);
+        })
+        console.log("taxonomy: " + taxonomyArray);
+    });
+}
+
+function getEmotion(params) {
+    var emotionArray = [];
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
+    $.getJSON(url, params, function(data) {
+        console.log("anger score: " + data.docEmotions.anger);
+        console.log("disgust score: " + data.docEmotions.disgust);
+        console.log("fear score: " + data.docEmotions.fear);
+        console.log("joy score: " + data.docEmotions.joy);
+        console.log("sadness score: " + data.docEmotions.sadness);
+    });
+}
+
+function getSentiment(params) {
+    var sentimentArray = [];
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
+    $.getJSON(url, params, function(data) {
+        sentimentArray.push(data.docSentiment.type);
+        console.log("sentiment " + sentimentArray);
+        console.log("sentiment score " + data.docSentiment.score);
+    });
+}
+
+
+//doesn't really work
+// function getEntities(params){
+//     var entitiesArray =[];
+//     url = 'http://access.alchemyapi.com/calls/text/TextGetRankedNamedEntities';
+//     $.getJSON(url, params, function(data) {
+//         $.each(data.entities, function(i, entities) {
+//             // console.log("entity :" + entities.text + " count: " + entities.count);
+//             // console.log(entities.type);         
+//             $.each(entities.sentiment, function(i, sentiment) {
+//                 entitiesArray.push(sentiment.type);
+//             })   
+//         })
+//         console.log(entitiesArray);
+//     });
+// }
+
 window.addEventListener('load', init())

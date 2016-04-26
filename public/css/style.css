@@ -136,19 +136,19 @@ a:hover {
     color: #0F7ADA;
 }
 
-/*.displayTil {
+.displayTil {
     color: #0F7ADA;
-}*/
+}
 
 
 
 .archive-display {
-  padding: 10px;
-  background-color:rgba(245,245,245,0.2);
+  padding: 10px 10px 500px 10px;
+  background-color:rgba(245,245,245,0.6);
 }
 
-.archive-display h2 {
-  text-transform: uppercase;
+.archive-display {
+/*  text-transform: uppercase;*/
 }
 
 /* from http://css3buttongenerator.com/ */

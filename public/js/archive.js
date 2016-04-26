@@ -10,7 +10,7 @@ var apiKey = "&api_key=dc6zaTOxFJmzC";
 var record;
 var tagArray; //for tag based gif search
 var tilText; //for keyword extratcted gif search
-var keywordsArray = [];
+var resultsArray = [];
 var searchTerm;
 
 
@@ -30,13 +30,13 @@ function renderDisplay() {
             var date = new Date(i.dateAdded); //turns the random entry's data into data object
             if (i.name !== "" && i.name !== "undefined") { //checks for name and displays if available
                 var htmlToAdd = '<div class="col-md-12">' +
-                    '<h2><span class ="displayDate">' + date.toDateString() + '</span></h2>' + //convert date object to date
-                    '<h2><span class="displayTil">' + i.til + '</span></h2>' +
-                    '<h4>Context: <span class="displayContext">' + i.context + '</span></h4>' +
-                    '<h4>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h4>' +
-                    '<h4>Tags: <span class="tags">' + i.tags + '</span></h4>' +
-                    '<h4>Name: <span class="name">' + i.name + '</span></h4>' +
-                    '<h4 class="hide">ID: <span class="displayId">' + i._id + '</span></h4>' +
+                    '<h3><span class ="displayDate">' + date.toDateString() + '</span></h3>' + //convert date object to date
+                    '<h3><span class="displayTil">' + i.til + '</span></h3>' +
+                    '<h6>Context: <span class="displayContext">' + i.context + '</span></h6>' +
+                    '<h6>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h6>' +
+                    '<h6>Tags: <span class="tags">' + i.tags + '</span></h6>' +
+                    '<h6>Name: <span class="name">' + i.name + '</span></h6>' +
+                    '<h6 class="hide">ID: <span class="displayId">' + i._id + '</span></h6>' +
                     // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="window.location.reload()">' +
                     '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="newEntry()">' +
                     '</div>';
@@ -133,10 +133,10 @@ function findKeyword() {
 
     $.getJSON(url, params, function(data) {
         $.each(data.keywords, function(i, results) {
-            keywordsArray.push(results.text);
+            resultsArray.push(results.text);
         })
-        console.log("keywordsArray :" + keywordsArray);
-        var j = keywordsArray[Math.floor(Math.random() * keywordsArray.length)];
+        console.log("resultsArray :" + resultsArray);
+        var j = resultsArray[Math.floor(Math.random() * resultsArray.length)];
         searchTerm = j;
         console.log("search term from Alchemy keyword: " + j)
         searchGiphy(searchTerm);
