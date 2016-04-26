@@ -5,7 +5,6 @@ var apiKey = "&api_key=dc6zaTOxFJmzC";
 
 var tilText = []; //for keyword extratcted gif search
 
-
 function init() {
     renderAll();
     renderGiphy();
@@ -13,9 +12,7 @@ function init() {
 
 // get Record JSON from /api/get
 function renderAll() {
-    // first, make sure the #record-holder is empty
     jQuery('#all-records').empty();
-
     jQuery.ajax({
         url: '/api/get',
         dataType: 'json',
@@ -36,7 +33,7 @@ function renderAll() {
                 //     '</div>';
                 // jQuery("#all-records").append(htmlToAdd);
                 //this is the input
-                tilText.push(record[i].til);
+                tilText.push(record[i].til, record[i].context, record[i].bestPartDay, record[i].tags);
             }
             passAlchemy(tilText);
 
@@ -55,37 +52,43 @@ function renderGiphy() {
             $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
         }
     })
-
 }
 
 function passAlchemy() {
     var tilTextString = String(tilText); //converts obj to string
-    var charSent = 7500; //max that can be sent 18,969 char with spaces currently
-    var trimmedString = tilTextString.substring(0, charSent);
-    console.log("characters sent: " + charSent);
+    // var charSent = 18000; //max that can be sent 18,969 char with spaces currently
+    // var trimmedString = tilTextString.substring(0, charSent);
+    // console.log("characters sent: " + charSent);
+    console.log("characters sent: " + tilTextString.length);
     params = {
-        text: trimmedString,
+        // text: trimmedString,
+        text: tilTextString,
         apikey: '919a594d65f26f48b528c3e9c49a43c84474d294',
         outputMode: 'json'
     }
     getKeywords(params);
-    // getConcepts(params);
-    // getTaxnonomy(params);
-    // getEmotion(params);
-    // getSentiment(params);
+    getConcepts(params);
+    getTaxnonomy(params);
+    getEmotion(params);
+    getSentiment(params);
     // getEntities(params); doesn't work
 }
 
-
-//using jQuery to GET JSON: http://webtutsdepot.com/2009/11/28/how-to-read-json-with-javascript/
-function getKeywords() {
+//http://www.alchemyapi.com/api/keyword/textc.html
+function getKeywords(params) {
     var keywordsArray = [];
     url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
-    $.getJSON(url, params, function(data) {
-        $.each(data.keywords, function(i, results) {
-            keywordsArray.push(results.text);
-        })
-        console.log("keywords: " + keywordsArray);
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            $.each(data.keywords, function(i, results) {
+                keywordsArray.push(results.text);
+            })
+            console.log("keywords: " + keywordsArray);
+        },
+        dataType: 'json'
     });
 }
 
@@ -93,47 +96,73 @@ function getKeywords() {
 function getConcepts(params) {
     var conceptsArray = [];
     url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
-    $.getJSON(url, params, function(data) {
-        $.each(data.concepts, function(i, results) {
-            conceptsArray.push(results.text);
-        })
-        console.log("concepts: " + conceptsArray);
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            $.each(data.concepts, function(i, results) {
+                conceptsArray.push(results.text);
+            })
+            console.log("concepts: " + conceptsArray);
+        },
+        dataType: 'json'
     });
 }
 
+//http://www.alchemyapi.com/api/taxonomy_calls/text.html
 function getTaxnonomy(params) {
     var taxonomyArray = [];
     url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
-    $.getJSON(url, params, function(data) {
-        $.each(data.taxonomy, function(i, results) {
-            taxonomyArray.push(results.label);
-        })
-        console.log("taxonomy: " + taxonomyArray);
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            $.each(data.taxonomy, function(i, results) {
+                taxonomyArray.push(results.label);
+            })
+            console.log("taxonomy: " + taxonomyArray);
+        },
+        dataType: 'json'
     });
 }
 
+//http://www.alchemyapi.com/api/text-api-0
 function getEmotion(params) {
     var emotionArray = [];
     url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
-    $.getJSON(url, params, function(data) {
-        console.log("anger score: " + data.docEmotions.anger);
-        console.log("disgust score: " + data.docEmotions.disgust);
-        console.log("fear score: " + data.docEmotions.fear);
-        console.log("joy score: " + data.docEmotions.joy);
-        console.log("sadness score: " + data.docEmotions.sadness);
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            console.log("anger score: " + data.docEmotions.anger);
+            console.log("disgust score: " + data.docEmotions.disgust);
+            console.log("fear score: " + data.docEmotions.fear);
+            console.log("joy score: " + data.docEmotions.joy);
+            console.log("sadness score: " + data.docEmotions.sadness);
+        },
+        dataType: 'json'
     });
 }
 
-function getSentiment(params) {
-    var sentimentArray = [];
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
-    $.getJSON(url, params, function(data) {
-        sentimentArray.push(data.docSentiment.type);
-        console.log("sentiment " + sentimentArray);
-        console.log("sentiment score " + data.docSentiment.score);
-    });
-}
-
+http: //www.alchemyapi.com/api/sentiment/textc.html
+    function getSentiment(params) {
+        var sentimentArray = [];
+        url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            success: function(data) {
+                sentimentArray.push(data.docSentiment.type);
+                console.log("sentiment " + sentimentArray);
+                console.log("sentiment score " + data.docSentiment.score);
+            },
+            dataType: 'json'
+        });
+    }
 
 //doesn't really work
 // function getEntities(params){
