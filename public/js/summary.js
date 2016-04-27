@@ -1,8 +1,5 @@
-//Giphy Endpoints
 var api = "https://api.giphy.com";
-var trendingGif = "/v1/gifs/trending?";
 var apiKey = "&api_key=dc6zaTOxFJmzC";
-
 var tilText = []; //for keyword extratcted gif search
 
 function init() {
@@ -19,24 +16,9 @@ function renderAll() {
         success: function(response) {
             var record = response.record;
             for (var i = 0; i < record.length; i++) {
-                // var date = new Date(record[i].dateAdded); // turn string into a date object
-                // var htmlToAdd = '<div class="col-md-12 archive-display">' +
-                //     '<h1><span class ="dateConverted">' + date.toDateString() + '</span></h1>' + //translated date
-                //     '<h1>Today I learned: <span class="til">' + record[i].til + '</span></h1>' +
-                //     '<ul>' +
-                //     '<li>Context: <span class="context">' + record[i].context + '</span></li>' +
-                //     '<li>Best Parts Of The Day: <span class="bestPartDay">' + record[i].bestPartDay + '</span></li>' +
-                //     '<li>Tags: <span class="tags">' + record[i].tags + '</span></li>' +
-                //     '<li>Name: <span class="name">' + record[i].name + '</span></li>' +
-                //     '<li class="hide">ID: <span class="id">' + record[i]._id + '</span></li>' +
-                //     '</ul>' +
-                //     '</div>';
-                // jQuery("#all-records").append(htmlToAdd);
-                //this is the input
-                tilText.push(record[i].til, record[i].context, record[i].bestPartDay, record[i].tags);
+                tilText.push(record[i].til, record[i].context, record[i].bestPartDay);
             }
             passAlchemy(tilText);
-
         }
     })
 }

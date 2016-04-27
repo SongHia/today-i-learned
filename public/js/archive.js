@@ -32,8 +32,8 @@ function loadEntry() {
     var i = tilRecord[Math.floor(Math.random() * tilRecord.length)]; //get random entry
     var date = new Date(i.dateAdded); //convert entry date into a date object
     var htmlToAdd = '<div class="col-md-12">' +
-        '<h2><span class ="displayDate">' + date.toDateString() + '</span></h2>' + //human readable date
-        '<h2><span class="displayTil">' + i.til + '</span></h2>' +
+        '<h4><span class ="displayDate">' + date.toDateString() + '</span></h4>' + //human readable date
+        '<h4><span class="displayTil">' + i.til + '</span></h4>' +
         '<h4>Context: <span class="displayContext">' + i.context + '</span></h4>' +
         '<h4>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h4>' +
         '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
@@ -50,8 +50,8 @@ function passAlchemy(tilText) {
         apikey: alchemyKey,
         outputMode: 'json'
     }
-    getKeywords(params);
-    // getConcepts(params);
+    // getKeywords(params);
+    getConcepts(params);
     // getTaxnonomy(params);
     // getEmotion(params);
     // getSentiment(params);

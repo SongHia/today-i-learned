@@ -24,8 +24,14 @@ body {
 
 
 
-body h1, h2, h3, h4{
+body h1{
     text-shadow: 2px 2px #000;
+}
+
+body h2, h3, h4{
+    /*text-shadow: 2px 2px #000;*/
+    /* http://css3gen.com/text-shadow/*/
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
 
 label {

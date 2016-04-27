@@ -12,6 +12,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Record = require("../models/record.js"); // our db model
+var twilio = require('twilio');
 
 /**
  * GET '/'
@@ -21,53 +22,53 @@ var Record = require("../models/record.js"); // our db model
  */
 router.get('/', function(req, res) {
 
-  console.log('home page requested!');
+    console.log('home page requested!');
 
-  // var jsonData = {
-  // 	'name': 'today-i-learned',
-  // 	'api-status':'OK',
-  //   'instructions': 'text 917-746-4128 with your lesson of the day',
-  //   'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
-  // }
-  // // respond with json data
-  // res.json(jsonData)
+    // var jsonData = {
+    //  'name': 'today-i-learned',
+    //  'api-status':'OK',
+    //   'instructions': 'text 917-746-4128 with your lesson of the day',
+    //   'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
+    // }
+    // // respond with json data
+    // res.json(jsonData)
 
-  res.render('home.html')
+    res.render('home.html')
 
 });
 
 // simple route to show an HTML page for adding data
-router.get('/home', function(req,res){
+router.get('/home', function(req, res) {
 
-  res.render('home.html')
-
-})
-
-// simple route to show an HTML page for recorded data
-router.get('/admin', function(req,res){
-
-  res.render('admin.html')
+    res.render('home.html')
 
 })
 
 // simple route to show an HTML page for recorded data
-router.get('/archive', function(req,res){
+router.get('/admin', function(req, res) {
 
-  res.render('archive.html')
+    res.render('admin.html')
+
+})
+
+// simple route to show an HTML page for recorded data
+router.get('/archive', function(req, res) {
+
+    res.render('archive.html')
 
 })
 
 // simple route to show an HTML page for success
-router.get('/success', function(req,res){
+router.get('/success', function(req, res) {
 
-  res.render('success.html')
+    res.render('success.html')
 
 })
 
 // simple route to show an HTML page for success
-router.get('/summary', function(req,res){
+router.get('/summary', function(req, res) {
 
-  res.render('summary.html')
+    res.render('summary.html')
 
 })
 
@@ -77,90 +78,93 @@ router.get('/summary', function(req,res){
 //  * @param  {Object} req. An object containing the different attributes of the Person
 //  * @return {Object} JSON
 //  */
-router.post('/api/create', function(req, res){
+router.post('/api/create', function(req, res) {
 
-  console.log(req.body);
-  
-  var recordObj = {
-    til: req.body.til,
-    context: req.body.context,
-    bestPartDay: req.body.bestPartDay,
-    // name: req.body.name,
-    // tags: req.body.tags.split(',')
-    // pageURL: req.body.pageURL,
+    console.log(req.body);
 
-  }
-
-  var record = new Record(recordObj);
-
-  record.save(function(err,data){
-    if(err){
-      var error = {
-        status: "ERROR",
-        message: err
-      }
-      return res.json(err)
+    var recordObj = {
+        til: req.body.til,
+        context: req.body.context,
+        bestPartDay: req.body.bestPartDay,
+        // name: req.body.name,
+        // tags: req.body.tags.split(',')
+        // pageURL: req.body.pageURL,
 
     }
 
-    // var jsonData = {
-    //   status: "OK",
-    //   record: data
-    // }
+    var record = new Record(recordObj);
 
-    // return res.json(jsonData);
-  
-    return res.redirect('/success');
-  })
+    record.save(function(err, data) {
+        if (err) {
+            var error = {
+                status: "ERROR",
+                message: err
+            }
+            return res.json(err)
+
+        }
+
+        // var jsonData = {
+        //   status: "OK",
+        //   record: data
+        // }
+
+        // return res.json(jsonData);
+
+        return res.redirect('/success');
+    })
 })
 
 //get api
-router.get('/api/get', function(req,res){
+router.get('/api/get', function(req, res) {
 
-  Record.find(function(err,data){
+    Record.find(function(err, data) {
 
-      if(err){
-        var error = {
-          status: "ERROR",
-          message: err
+        if (err) {
+            var error = {
+                status: "ERROR",
+                message: err
+            }
+            return res.json(err)
         }
-        return res.json(err)
-      }
 
-      var jsonData = {
-        status: "OK",
-        record: data
-      }
+        var jsonData = {
+            status: "OK",
+            record: data
+        }
 
-      return res.json(jsonData);
+        return res.json(jsonData);
 
-  })
+    })
 
 })
 
 //get id
-router.get('/api/get/:id', function(req, res){
+router.get('/api/get/:id', function(req, res) {
 
-  var requestedId = req.param('id');
+    var requestedId = req.param('id');
 
-  // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model.findById
-  Record.findById(requestedId, function(err,data){
+    // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model.findById
+    Record.findById(requestedId, function(err, data) {
 
-    // if err or no user found, respond with error 
-    if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find that record'};
-       return res.json(error);
-    }
+        // if err or no user found, respond with error 
+        if (err || data == null) {
+            var error = {
+                status: 'ERROR',
+                message: 'Could not find that record'
+            };
+            return res.json(error);
+        }
 
-    // otherwise respond with JSON data of the animal
-    var jsonData = {
-      status: 'OK',
-      record: data
-    }
+        // otherwise respond with JSON data of the animal
+        var jsonData = {
+            status: 'OK',
+            record: data
+        }
 
-    return res.json(jsonData);
-  
-  })
+        return res.json(jsonData);
+
+    })
 })
 
 /**
@@ -171,26 +175,29 @@ router.get('/api/get/:id', function(req, res){
  */
 
 
-router.get('/api/delete/:id', function(req, res){
+router.get('/api/delete/:id', function(req, res) {
 
-  var requestedId = req.param('id');
+    var requestedId = req.param('id');
 
-  // Mongoose method to remove, http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
-  Record.findByIdAndRemove(requestedId,function(err, data){
-    if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find that record to delete'};
-      return res.json(error);
-    }
+    // Mongoose method to remove, http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
+    Record.findByIdAndRemove(requestedId, function(err, data) {
+        if (err || data == null) {
+            var error = {
+                status: 'ERROR',
+                message: 'Could not find that record to delete'
+            };
+            return res.json(error);
+        }
 
-    // otherwise, respond back with success
-    var jsonData = {
-      status: 'OK',
-      message: 'Successfully deleted id ' + requestedId
-    }
+        // otherwise, respond back with success
+        var jsonData = {
+            status: 'OK',
+            message: 'Successfully deleted id ' + requestedId
+        }
 
-    res.json(jsonData);
+        res.json(jsonData);
 
-  })
+    })
 
 })
 
@@ -203,11 +210,11 @@ router.get('/api/delete/:id', function(req, res){
 //  * @return {Object} JSON
 //  */
 
-router.post('/api/update/:id', function(req, res){
+router.post('/api/update/:id', function(req, res) {
 
-   var requestedId = req.param('id');
+    var requestedId = req.param('id');
 
-   var dataToUpdate = {}; // a blank object of data to update
+    var dataToUpdate = {}; // a blank object of data to update
 
     // pull out the information from the req.body and add it to the object to update
     var til, context, bestPartDay, name, dateAdded;
@@ -216,39 +223,39 @@ router.post('/api/update/:id', function(req, res){
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
-    if(req.body.til) {
-      til = req.body.til;
-      // add to object that holds updated data
-      dataToUpdate['til'] = til;
+    if (req.body.til) {
+        til = req.body.til;
+        // add to object that holds updated data
+        dataToUpdate['til'] = til;
     }
-    if(req.body.context) {
-      context = req.body.context;
-      // add to object that holds updated data
-      dataToUpdate['context'] = context;
+    if (req.body.context) {
+        context = req.body.context;
+        // add to object that holds updated data
+        dataToUpdate['context'] = context;
     }
-    if(req.body.bestPartDay) {
-    bestPartDay = req.body.bestPartDay;
-    // add to object that holds updated data
-    dataToUpdate['bestPartDay'] = bestPartDay;
+    if (req.body.bestPartDay) {
+        bestPartDay = req.body.bestPartDay;
+        // add to object that holds updated data
+        dataToUpdate['bestPartDay'] = bestPartDay;
     }
-    
-    if(req.body.tags){
-      tags = req.body.tags.split(","); // split string into array
-      // add to object that holds updated data
-      dataToUpdate['tags'] = tags;
+
+    if (req.body.tags) {
+        tags = req.body.tags.split(","); // split string into array
+        // add to object that holds updated data
+        dataToUpdate['tags'] = tags;
     }
-    if(req.body.name) {
-    name = req.body.name;
-    // add to object that holds updated data
-    dataToUpdate['name'] = name;
+    if (req.body.name) {
+        name = req.body.name;
+        // add to object that holds updated data
+        dataToUpdate['name'] = name;
     }
 
 
     //NEW
-    if(req.body.dateAdded) {
-    dateAdded = req.body.dateAdded;
-    // add to object that holds updated data
-    dataToUpdate['dateAdded'] = dateAdded;
+    if (req.body.dateAdded) {
+        dateAdded = req.body.dateAdded;
+        // add to object that holds updated data
+        dataToUpdate['dateAdded'] = dateAdded;
     }
 
     // if(req.body.pageURL) {
@@ -261,25 +268,81 @@ router.post('/api/update/:id', function(req, res){
 
     // now, update that record
     // mongoose method findByIdAndUpdate, see http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate  
-    Record.findByIdAndUpdate(requestedId, dataToUpdate, function(err,data){
-      // if err saving, respond back with error
-      if (err){
-        var error = {status:'ERROR', message: 'Error updating record'};
-        return res.json(error);
-      }
+    Record.findByIdAndUpdate(requestedId, dataToUpdate, function(err, data) {
+        // if err saving, respond back with error
+        if (err) {
+            var error = {
+                status: 'ERROR',
+                message: 'Error updating record'
+            };
+            return res.json(error);
+        }
 
-      console.log('Updated the record!');
-      console.log(data);
+        console.log('Updated the record!');
+        console.log(data);
 
-      // now return the json data of the new person
-      var jsonData = {
-        status: 'OK',
-        record: data
-      }
+        // now return the json data of the new person
+        var jsonData = {
+            status: 'OK',
+            record: data
+        }
 
-      return res.json(jsonData);
+        return res.json(jsonData);
 
     })
+
+})
+
+// this route gets called whenever Twilio receives a message
+router.post('/twilio-callback', function(req, res) {
+
+    // there's lots contained in the body
+    console.log(req.body);
+    // the actual message is contained in req.body.Body
+    var incomingMsg = req.body.Body;
+
+    //incoming messages look like:
+    //'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
+
+
+    var msgArray = incomingMsg.split(',');
+    //msg Array --> [Rain is wet, This morning it was gross outside, Having ice cream, tag1.tag2.tag3]
+    var til = msgArray[0];
+    var context = msgArray[1];
+    var bestPartDay = msgArray[2];
+    // var tags = msgArray[3].split('.');
+
+
+    //now let's save to our database
+    var recordObj = {
+        til: til,
+        context: context,
+        // tags: req.body.tags.split(','),
+        bestPartDay: bestPartDay,
+        // tags: tags
+            // pageURL: req.body.pageURL,
+    }
+
+    var record = new Record(recordObj)
+
+    record.save(function(err, data) {
+        // set up the twilio response
+        var twilioResp = new twilio.TwimlResponse();
+        if (err) {
+            // respond to user
+            twilioResp.sms('Oops! We couldn\'t save your lesson! --> ' + incomingMsg);
+            // respond to twilio
+            res.set('Content-Type', 'text/xml');
+            res.send(twilioResp.toString());
+        } else {
+            // respond to user
+            twilioResp.sms('Successfully saved your lesson! --> ' + incomingMsg);
+            // respond to twilio
+            res.set('Content-Type', 'text/xml');
+            res.send(twilioResp.toString());
+        }
+    })
+
 
 })
 
