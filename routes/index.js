@@ -318,9 +318,9 @@ router.post('/twilio-callback', function(req, res) {
         til: til,
         context: context,
         // tags: req.body.tags.split(','),
-        bestPartDay: bestPartDay,
+        bestPartDay: bestPartDay
         // tags: tags
-            // pageURL: req.body.pageURL,
+        // pageURL: req.body.pageURL,
     }
 
     var record = new Record(recordObj)
