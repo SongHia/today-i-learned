@@ -21,7 +21,7 @@ function loadAll() {
         var date = new Date(tilRecord[i].dateAdded); // turn string into a date object
         var htmlToAdd = '<div id="admin-entry">' +
             '<h4><span class ="dateConverted">' + date.toDateString() + '</span></h4>' + //translated date
-            // '<h1><span class ="dateAdded">' + tilRecord[i].dateAdded + '</span></h1>' + //orginal date record
+            '<h1><span class ="dateAdded">' + tilRecord[i].dateAdded + '</span></h1>' + //og date - needed to edit
             '<p>Today I learned: <span class="til">' + tilRecord[i].til + '</span></p>' +
             '<p>Context: <span class="context">' + tilRecord[i].context + '</span></p>' +
             '<p>Best Parts Of The Day: <span class="bestPartDay">' + tilRecord[i].bestPartDay + '</span></p>' +
