@@ -1,6 +1,8 @@
 //API keys
 var giphyKey = "&api_key=dc6zaTOxFJmzC"; //Giphy
-var alchemyKey = "919a594d65f26f48b528c3e9c49a43c84474d294"; //Alchemy
+// var alchemyKey = "919a594d65f26f48b528c3e9c49a43c84474d294"; //Alchemy
+
+var alchemyKey = "813690b3a9451d66287c9b3e9c5fcce63634ff67"; //newer API key
 
 //objects
 var tilRecord; //for TIL API object
@@ -14,6 +16,7 @@ var resultsArray;
 
 function init() {
     getTILJSON();
+    autoReload();
 }
 
 function getTILJSON() {
@@ -27,27 +30,33 @@ function getTILJSON() {
     })
 }
 
+function autoReload() {
+    setInterval(function() {
+        console.log("auto reload");
+        loadEntry();
+    }, 8000);
+}
+
 function loadEntry() {
     jQuery("#record-display").empty(); //clear old entry
     var i = tilRecord[Math.floor(Math.random() * tilRecord.length)]; //get random entry
     var date = new Date(i.dateAdded); //convert entry date into a date object
-    if(i.bestPartDay !== "") {
-    var htmlToAdd = '<div class="col-md-12">' +
-        '<h4><span class ="displayDate">' + date.toDateString() + '</span></h4>' + //human readable date
-        '<p><span class="displayTil">' + i.til + '</span></p>' +
-        '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
-        '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
-        // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
-        '</div>';
-    }
-    else {
+    if (i.bestPartDay !== "") {
         var htmlToAdd = '<div class="col-md-12">' +
-        '<h4><span class ="displayDate">' + date.toDateString() + '</span></h4>' + //human readable date
-        '<p><span class="displayTil">' + i.til + '</span></p>' +
-        '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
-        // '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
-        // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
-        '</div>';
+            '<h4><span class ="displayDate">' + date.toDateString() + '</span></h4>' + //human readable date
+            '<p><span class="displayTil">' + i.til + '</span></p>' +
+            '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
+            '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
+            // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
+            '</div>';
+    } else {
+        var htmlToAdd = '<div class="col-md-12">' +
+            '<h4><span class ="displayDate">' + date.toDateString() + '</span></h4>' + //human readable date
+            '<p><span class="displayTil">' + i.til + '</span></p>' +
+            '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
+            // '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
+            // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
+            '</div>';
     }
     jQuery("#record-display").append(htmlToAdd); //add new entry
     tilText = i.til + " " + i.context + " " + i.bestPartDay; //Alchemy input text
@@ -187,7 +196,7 @@ function searchGiphy(resultsArray, searchTerm, searchType) {
 }
 
 function giphyBackground() {
-    jQuery("#giphy-display").empty(); 
+    jQuery("#giphy-display").empty();
     var i = giphyRecord[Math.floor(Math.random() * giphyRecord.length)]; //random giphy from results
     // $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
 
