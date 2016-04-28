@@ -36,6 +36,7 @@ function loadEntry() {
         '<p><span class="displayTil">' + i.til + '</span></p>' +
         '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
         '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
+        '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
         '</div>';
     jQuery("#record-display").append(htmlToAdd); //add new entry
     tilText = i.til + " " + i.context + " " + i.bestPartDay; //Alchemy input text
@@ -169,7 +170,7 @@ function searchGiphy(resultsArray, searchTerm, searchType) {
         dataType: 'json',
         success: function(response) {
             giphyRecord = response.data;
-            giphyBackground();
+            giphyBackground(giphyRecord);
         }
     })
 }
@@ -179,19 +180,18 @@ function giphyBackground() {
     var i = giphyRecord[Math.floor(Math.random() * giphyRecord.length)]; //random giphy from results
     // $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
 
-    var htmlToAdd = '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' + 
-    '<br>' + '<img src="' + i.images.original.url + '">' + '<br>';
+    var htmlToAdd = '<img src="' + i.images.original.url + '">' + '<br>';
     jQuery("#giphy-display").append(htmlToAdd);
 
     // loadAlchemy();    
 }
 
-function loadAlchemy() {
-    jQuery("#searchterm-display").empty();
-    var htmlToAdd = '<div class="col-md-12">' +
-        '<h6>Alchemy found these ' + searchType + ": " + resultsArray + " and searched Giphy for " + searchTerm + '</h6>' +
-        '</div>';
-    jQuery("#searchterm-display").append(htmlToAdd); //adds entry information
-}
+// function loadAlchemy() {
+//     jQuery("#searchterm-display").empty();
+//     var htmlToAdd = '<div class="col-md-12">' +
+//         '<h6>Alchemy found these ' + searchType + ": " + resultsArray + " and searched Giphy for " + searchTerm + '</h6>' +
+//         '</div>';
+//     jQuery("#searchterm-display").append(htmlToAdd); //adds entry information
+// }
 
 window.addEventListener('load', init())
