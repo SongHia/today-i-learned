@@ -19,15 +19,12 @@ body {
 }*/
 
 body h2, h3, h4 {
-    text-shadow: 2px 2px #000;
+    /*text-shadow: 2px 2px #000;*/
     /* http://css3gen.com/text-shadow/*/
   /*  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);*/
 }
 
-label {
-    color: #000;
- /*   text-shadow: 2px 2px #000;*/
-}
+
 
 .main h1 {
   text-shadow: 2px 2px #000;
@@ -100,7 +97,7 @@ li {
 
 #giphy-display img{
   width: 100%;
-  max-width:700px;
+  max-width:800px;
   height:auto;
   display: block;
   margin: 0 auto;
@@ -162,6 +159,7 @@ li {
     padding: 10px 10px 20px 10px;
     /*background-color: rgba(245, 245, 245, 0.4);*/
     background-color: #fff;
+    height: 100%;
 }
 
 
@@ -193,4 +191,37 @@ li {
     background-image: -o-linear-gradient(top, #0FB8E4, #0FB8E4);
     background-image: linear-gradient(to bottom, #0FB8E4, #0FB8E4);
     text-decoration: none;
+}
+
+
+/*template CSS */
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  /*padding: 40px 15px;*/
+  padding: 10px 15px 50px 15px;
+  text-align: center;
+}
+
+/* */
+.starter-template .form-group{
+    color: #000;
+    text-align: left;
+ /*   text-shadow: 2px 2px #000;*/
+}
+
+button {
+    text-align: left;
+    float: left;
+}
+
+.form-group button {
+/*    margin: 100px;*/
+/*    margin: 10px 0;*/
+}
+
+
+#bestPartDay {
+    /*padding-bottom: 100px;*/
 }

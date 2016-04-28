@@ -40,7 +40,7 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/record">Record</a></li>
+                    <li class="active"><a href="/record">Record</a></li>
                     <li><a href="/remember">Remember</a></li>
                     <li><a href="/summary">Summary</a></li>
                 </ul>
@@ -51,11 +51,46 @@
     <div class="container" onClick="loadEntry()">
         <div class="starter-template archive-display">
             <div class="main">
-                <h1>SUCCESS</h1>
+                <h1>RECORD</h1>
             </div>
-      <a href="/record"><button type="button" class="btn btn-default">Record Another</button></a>
+            <div class="main">
+                <h5>The present is a present. How was your day?</h5>
+            </div>
+            <form method="post" action="/api/create">
+                <div class="form-group">
+                    <label for="til">Today</label>
+                    <input type="text" class="form-control" id="til" placeholder="I learned/observed/felt..." name="til" required>
+                </div>
+                <div class="form-group">
+                    <label for="context">The Context</label>
+                    <input type="text" class="form-control" id="context" placeholder="for this was..." name="context" required>
+                </div>
+                <div class="form-group">
+                    <label for="bestPartDay">The Best Parts Of The Day (optional)</label>
+                    <input type="text" class="form-control" id="bestPartDay" placeholder="were when..." name="bestPartDay">
+                   
+                </div>
+                <!--                     <div class="form-group">
+                        <label for="tags">Tags (Optional)</label>
+                        <input type="text" class="form-control" id="tags" placeholder="seperate with commas" name="tags">
+                    </div> -->
+                <!-- test date added NEW-->
+                <!--                     <div class="form-group">
+                        <label for="dateAdded">Date</label>
+                        <input type="text" class="form-control" id="dateAdded" placeholder="date" name="dateAdded" required>
+                    </div> -->
+                <!--                     <div class="form-group">
+                        <label for="name">Name (Optional)</label>
+                        <input type="text" class="form-control" id="name" placeholder="" name="name">
+                    </div> -->
+                 <button type="submit" class="btn btn-default">Record</button>
+                <!--new-->
+                <div id="giphy-display"></div>
+            </form>
         </div>
         <div class="push"></div>
+    </div>
+    </div>
     </div>
     <!-- /.container -->
     <!-- <div class="push"></div> -->
@@ -80,8 +115,13 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <!-- JQuery validate -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+    $("form").validate({});
+    </script>
     <!-- CUSTOM JS -->
-    <script src="js/success.js"></script>
+    <script src="js/record.js"></script>
 </body>
 
 </html>

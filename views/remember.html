@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <title>RECORD</title>
+    <title>REMEMBER</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -41,7 +41,7 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/record">Record</a></li>
-                    <li><a href="/remember">Remember</a></li>
+                    <li class="active"><a href="/remember">Remember</a></li>
                     <li><a href="/summary">Summary</a></li>
                 </ul>
             </div>
@@ -49,13 +49,16 @@
         </div>
     </nav>
     <div class="container" onClick="loadEntry()">
-        <div class="starter-template archive-display">
+        <div class="starter-template archive-display" >
             <div class="main">
-                <h1>SUCCESS</h1>
+                <h1>REMEMBER WHEN</h1>
             </div>
-      <a href="/record"><button type="button" class="btn btn-default">Record Another</button></a>
+            <div id="record-display"></div>
+            <div id="searchterm-display"></div>
+            <div id="giphy-display"></div>
+            <div class="push"></div>
         </div>
-        <div class="push"></div>
+    </div>
     </div>
     <!-- /.container -->
     <!-- <div class="push"></div> -->
@@ -81,7 +84,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <!-- CUSTOM JS -->
-    <script src="js/success.js"></script>
+    <script src="js/remember.js"></script>
 </body>
 
 </html>

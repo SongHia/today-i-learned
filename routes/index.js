@@ -25,14 +25,17 @@ var twilio = require('twilio');
  * @param  {Object} req
  * @return {Object} json
  */
+
+
+
 router.get('/', function(req, res) {
     console.log('home page requested!');
-    res.render('home.html')
+    res.render('record.html')
 });
 
 // simple route to show an HTML page for adding data
-router.get('/home', function(req, res) {
-    res.render('home.html')
+router.get('/record', function(req, res) {
+    res.render('record.html')
 })
 
 // simple route to show an HTML page for recorded data
@@ -41,8 +44,8 @@ router.get('/admin', function(req, res) {
 })
 
 // simple route to show an HTML page for recorded data
-router.get('/archive', function(req, res) {
-    res.render('archive.html')
+router.get('/remember', function(req, res) {
+    res.render('remember.html')
 })
 
 // simple route to show an HTML page for entry confirmation
