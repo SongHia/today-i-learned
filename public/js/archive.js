@@ -178,7 +178,7 @@ function searchGiphy(resultsArray, searchTerm, searchType) {
 function giphyBackground() {
     jQuery("#giphy-display").empty(); 
     var i = giphyRecord[Math.floor(Math.random() * giphyRecord.length)]; //random giphy from results
-    $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
+    // $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
 
     var htmlToAdd = '<img src="' + i.images.original.url + '">';
     jQuery("#giphy-display").append(htmlToAdd);
