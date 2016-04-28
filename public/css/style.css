@@ -80,10 +80,7 @@ li {
     background-color: #0FB8E4;
 }
 
-.giphy img {
-    height: 100%;
-    width: 100%;
-}
+
 
 .push {
     margin-bottom: 100px;
@@ -102,7 +99,11 @@ li {
 }
 
 #giphy-display img{
-  width: 100%;
+  width:70%;
+  height:auto;
+  display: block;
+  margin: 0 auto;
+  /*or display inline and center*/
 }
 .modal-header h4 {
     font-family: 'Cooper Hewitt', sans-serif;

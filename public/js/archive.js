@@ -36,7 +36,7 @@ function loadEntry() {
         '<p><span class="displayTil">' + i.til + '</span></p>' +
         '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
         '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
-        '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
+        // '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
         '</div>';
     jQuery("#record-display").append(htmlToAdd); //add new entry
     tilText = i.til + " " + i.context + " " + i.bestPartDay; //Alchemy input text
@@ -84,7 +84,7 @@ function getKeywords(params) {
 function getConcepts(params) {
     resultsArray = []; //clears array
     searchType = "concepts";
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
     $.ajax({
         type: "POST",
         url: url,
@@ -106,7 +106,7 @@ function getConcepts(params) {
 function getTaxnonomy(params) {
     resultsArray = [];
     searchType = "taxonomies";
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
     $.ajax({
         type: "POST",
         url: url,
@@ -128,7 +128,7 @@ function getTaxnonomy(params) {
 function getEmotion(params) {
     resultsArray = [];
     searchType = "emotion scores";
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
     $.ajax({
         type: "POST",
         url: url,
@@ -147,7 +147,7 @@ function getEmotion(params) {
 //needs work
 function getSentiment(params) {
     var sentimentArray = [];
-    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
+    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
     $.ajax({
         type: "POST",
         url: url,
