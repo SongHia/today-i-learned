@@ -33,7 +33,7 @@ function loadEntry() {
     var date = new Date(i.dateAdded); //convert entry date into a date object
     if(i.bestPartDay !== "") {
     var htmlToAdd = '<div class="col-md-12">' +
-        '<h3><span class ="displayDate">' + date.toDateString() + '</span></h3>' + //human readable date
+        '<h4><span class ="displayDate">' + date.toDateString() + '</span></h4>' + //human readable date
         '<p><span class="displayTil">' + i.til + '</span></p>' +
         '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
         '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
@@ -42,7 +42,7 @@ function loadEntry() {
     }
     else {
         var htmlToAdd = '<div class="col-md-12">' +
-        '<h3><span class ="displayDate">' + date.toDateString() + '</span></h3>' + //human readable date
+        '<h4><span class ="displayDate">' + date.toDateString() + '</span></h4>' + //human readable date
         '<p><span class="displayTil">' + i.til + '</span></p>' +
         '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
         // '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
