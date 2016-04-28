@@ -215,11 +215,21 @@ body {
   text-align: center;
 }
 
+.admin-display {
+  /*padding: 40px 15px;*/
+  padding: 10px 15px 50px 15px;
+  text-align: left;
+}
+
 /* */
 .starter-template .form-group{
     color: #000;
     text-align: left;
  /*   text-shadow: 2px 2px #000;*/
+}
+
+#admin-entry {
+    padding-bottom: 20px;
 }
 
 button {

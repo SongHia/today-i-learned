@@ -19,17 +19,15 @@ function loadAll() {
     jQuery('#all-records').empty();
     for (var i = 0; i < tilRecord.length; i++) {
         var date = new Date(tilRecord[i].dateAdded); // turn string into a date object
-        var htmlToAdd = '<div class="col-md-12 archive-display">' +
-            '<h1><span class ="dateConverted">' + date.toDateString() + '</span></h1>' + //translated date
-            '<h1><span class ="dateAdded">' + tilRecord[i].dateAdded + '</span></h1>' + //orginal date record
-            '<h1>Today I learned: <span class="til">' + tilRecord[i].til + '</span></h1>' +
-            '<ul>' +
-            '<li>Context: <span class="context">' + tilRecord[i].context + '</span></li>' +
-            '<li>Best Parts Of The Day: <span class="bestPartDay">' + tilRecord[i].bestPartDay + '</span></li>' +
-            '<li>Tags: <span class="tags">' + tilRecord[i].tags + '</span></li>' +
-            '<li>Name: <span class="name">' + tilRecord[i].name + '</span></li>' +
-            '<li class="hide">ID: <span class="id">' + tilRecord[i]._id + '</span></li>' +
-            '</ul>' +
+        var htmlToAdd = '<div id="admin-entry">' +
+            '<h4><span class ="dateConverted">' + date.toDateString() + '</span></h4>' + //translated date
+            // '<h1><span class ="dateAdded">' + tilRecord[i].dateAdded + '</span></h1>' + //orginal date record
+            '<p>Today I learned: <span class="til">' + tilRecord[i].til + '</span></p>' +
+            '<p>Context: <span class="context">' + tilRecord[i].context + '</span></p>' +
+            '<p>Best Parts Of The Day: <span class="bestPartDay">' + tilRecord[i].bestPartDay + '</span></p>' +
+            '<p>Tags: <span class="tags">' + tilRecord[i].tags + '</span></p>' +
+            '<p>Name: <span class="name">' + tilRecord[i].name + '</span></p>' +
+            '<p class="hide">ID: <span class="id">' + tilRecord[i]._id + '</span></p>' +
             '<button type="button" class="edit-button" id="' + tilRecord[i]._id + '" onclick="deleteRecord(event)">Delete Record</button>' +
             '<button type="button" class="edit-button" data-toggle="modal" data-target="#editModal"">Edit Record</button>' +
             '</div>';
