@@ -20,8 +20,8 @@ function loadAll() {
     for (var i = 0; i < tilRecord.length; i++) {
         var date = new Date(tilRecord[i].dateAdded); // turn string into a date object
         var htmlToAdd = '<div id="admin-entry">' +
-            '<h4><span class ="dateConverted">' + date.toDateString() + '</span></h4>' + //translated date
-            '<h1><span class ="dateAdded">' + tilRecord[i].dateAdded + '</span></h1>' + //og date - needed to edit
+            '<h4><span class ="dateConverted displayDate">' + date.toDateString() + '</span></h4>' + //translated date
+            '<h4><span class ="dateAdded displayDate">' + tilRecord[i].dateAdded + '</span></h4>' + //og date - needed to edit
             '<p>Today I learned: <span class="til">' + tilRecord[i].til + '</span></p>' +
             '<p>Context: <span class="context">' + tilRecord[i].context + '</span></p>' +
             '<p>Best Parts Of The Day: <span class="bestPartDay">' + tilRecord[i].bestPartDay + '</span></p>' +
