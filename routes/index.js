@@ -273,13 +273,14 @@ router.post('/twilio-callback', function(req, res) {
         var twilioResp = new twilio.TwimlResponse();
         if (err) {
             // respond to user
-            twilioResp.sms('There was an error this wasn\'t saved :( ' + incomingMsg);
+            twilioResp.sms('There was an error and this wasn\'t saved :( Your message: ' + incomingMsg);
             // respond to twilio
             res.set('Content-Type', 'text/xml');
             res.send(twilioResp.toString());
         } else {
             // respond to user
-            twilioResp.sms('This note was saved :) NOW it\'s time for bed :) ' + incomingMsg);
+            // twilioResp.sms('This note was saved :) NOW it\'s time for bed :) ' + incomingMsg);
+            twilioResp.sms('Thanks for the memory! NOW it\'s time to brush your teeth :)');
             // respond to twilio
             res.set('Content-Type', 'text/xml');
             res.send(twilioResp.toString());
