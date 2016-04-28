@@ -32,11 +32,10 @@ function loadEntry() {
     var i = tilRecord[Math.floor(Math.random() * tilRecord.length)]; //get random entry
     var date = new Date(i.dateAdded); //convert entry date into a date object
     var htmlToAdd = '<div class="col-md-12">' +
-        '<h4><span class ="displayDate">' + date.toDateString() + '</span></h4>' + //human readable date
-        '<h4><span class="displayTil">' + i.til + '</span></h4>' +
-        '<h4>Context: <span class="displayContext">' + i.context + '</span></h4>' +
-        '<h4>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></h4>' +
-        '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' +
+        '<h3><span class ="displayDate">' + date.toDateString() + '</span></h3>' + //human readable date
+        '<p><span class="displayTil">' + i.til + '</span></p>' +
+        '<p>Context: <span class="displayContext">' + i.context + '</span></p>' +
+        '<p>The Best Parts: <span class="displayBestPartDay">' + i.bestPartDay + '</span></p>' +
         '</div>';
     jQuery("#record-display").append(htmlToAdd); //add new entry
     tilText = i.til + " " + i.context + " " + i.bestPartDay; //Alchemy input text
@@ -50,8 +49,8 @@ function passAlchemy(tilText) {
         apikey: alchemyKey,
         outputMode: 'json'
     }
-    // getKeywords(params);
-    getConcepts(params);
+    getKeywords(params);
+    // getConcepts(params);
     // getTaxnonomy(params);
     // getEmotion(params);
     // getSentiment(params);
@@ -60,7 +59,7 @@ function passAlchemy(tilText) {
 function getKeywords(params) {
     resultsArray = []; //clears array
     searchType = "keywords";
-    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords';
 
     $.ajax({
         type: "POST",
@@ -84,7 +83,7 @@ function getKeywords(params) {
 function getConcepts(params) {
     resultsArray = []; //clears array
     searchType = "concepts";
-    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedConcepts';
     $.ajax({
         type: "POST",
         url: url,
@@ -106,7 +105,7 @@ function getConcepts(params) {
 function getTaxnonomy(params) {
     resultsArray = [];
     searchType = "taxonomies";
-    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedTaxonomy';
     $.ajax({
         type: "POST",
         url: url,
@@ -128,7 +127,7 @@ function getTaxnonomy(params) {
 function getEmotion(params) {
     resultsArray = [];
     searchType = "emotion scores";
-    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetEmotion';
     $.ajax({
         type: "POST",
         url: url,
@@ -147,7 +146,7 @@ function getEmotion(params) {
 //needs work
 function getSentiment(params) {
     var sentimentArray = [];
-    url = 'https://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
+    url = 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment';
     $.ajax({
         type: "POST",
         url: url,
@@ -176,15 +175,21 @@ function searchGiphy(resultsArray, searchTerm, searchType) {
 }
 
 function giphyBackground() {
-    jQuery("#searchterm-display").empty();
+    jQuery("#giphy-display").empty(); 
     var i = giphyRecord[Math.floor(Math.random() * giphyRecord.length)]; //random giphy from results
-    $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
-    loadAlchemy();    
+    // $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
+
+    var htmlToAdd = '<input type="button" class="refresh-button" value="GIF ME MORE" onClick="loadEntry()">' + 
+    '<br>' + '<img src="' + i.images.original.url + '">' + '<br>';
+    jQuery("#giphy-display").append(htmlToAdd);
+
+    // loadAlchemy();    
 }
 
 function loadAlchemy() {
+    jQuery("#searchterm-display").empty();
     var htmlToAdd = '<div class="col-md-12">' +
-        '<h4>Alchemy found these ' + searchType + ": " + resultsArray + " and searched Giphy for " + searchTerm + '</h4>' +
+        '<h6>Alchemy found these ' + searchType + ": " + resultsArray + " and searched Giphy for " + searchTerm + '</h6>' +
         '</div>';
     jQuery("#searchterm-display").append(htmlToAdd); //adds entry information
 }

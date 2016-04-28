@@ -16,9 +16,17 @@ function renderGiphy() {
         success: function(response) {
             var data = response.data; //stores the data object
             var i = data[Math.floor(Math.random() * data.length)]; //randomly picks data object from current trending gifs
-            $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
+            // $('body').css('background-image', 'url(' + i.images.original.url + ')'); //writes the url to css as bg image
+
+            //new
+            // var htmlToAdd = '<img src="' + i.images.original.url + '">'
+            // jQuery("#giphy-display").append(htmlToAdd); //adds entry information
         }
     })
 }
+
+
+
+
 
 window.addEventListener('load', init())

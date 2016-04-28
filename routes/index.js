@@ -1,12 +1,17 @@
 // GET routes
-// http://localhost:3000/api/get
-// http://localhost:3000/api/get/:id
-// http://localhost:3000/api/delete/:id
-// http://localhost:3000/add-til
-// http://localhost:3000/directory
+// root -> home
+// /home
+// /admin
+// /success
+// /archive
+// /sumary
+// /api/get/:id
+// /api/delete/:id
+// /add-til
+
 // POST routes
-// http://localhost:3000/api/create
-// http://localhost:3000/api/update/:id
+// /api/create
+// /api/update/:id
 
 var express = require('express');
 var router = express.Router();
@@ -21,55 +26,33 @@ var twilio = require('twilio');
  * @return {Object} json
  */
 router.get('/', function(req, res) {
-
     console.log('home page requested!');
-
-    // var jsonData = {
-    //  'name': 'today-i-learned',
-    //  'api-status':'OK',
-    //   'instructions': 'text 917-746-4128 with your lesson of the day',
-    //   'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
-    // }
-    // // respond with json data
-    // res.json(jsonData)
-
     res.render('home.html')
-
 });
 
 // simple route to show an HTML page for adding data
 router.get('/home', function(req, res) {
-
     res.render('home.html')
-
 })
 
 // simple route to show an HTML page for recorded data
 router.get('/admin', function(req, res) {
-
     res.render('admin.html')
-
 })
 
 // simple route to show an HTML page for recorded data
 router.get('/archive', function(req, res) {
-
     res.render('archive.html')
-
 })
 
-// simple route to show an HTML page for success
+// simple route to show an HTML page for entry confirmation
 router.get('/success', function(req, res) {
-
     res.render('success.html')
-
 })
 
-// simple route to show an HTML page for success
+// simple route to show an HTML page for TBA high level data
 router.get('/summary', function(req, res) {
-
     res.render('summary.html')
-
 })
 
 // /**
@@ -79,9 +62,7 @@ router.get('/summary', function(req, res) {
 //  * @return {Object} JSON
 //  */
 router.post('/api/create', function(req, res) {
-
     console.log(req.body);
-
     var recordObj = {
         til: req.body.til,
         context: req.body.context,
@@ -89,11 +70,8 @@ router.post('/api/create', function(req, res) {
         // name: req.body.name,
         // tags: req.body.tags.split(',')
         // pageURL: req.body.pageURL,
-
     }
-
     var record = new Record(recordObj);
-
     record.save(function(err, data) {
         if (err) {
             var error = {
@@ -101,25 +79,19 @@ router.post('/api/create', function(req, res) {
                 message: err
             }
             return res.json(err)
-
         }
-
         // var jsonData = {
         //   status: "OK",
         //   record: data
         // }
-
         // return res.json(jsonData);
-
         return res.redirect('/success');
     })
 })
 
 //get api
 router.get('/api/get', function(req, res) {
-
     Record.find(function(err, data) {
-
         if (err) {
             var error = {
                 status: "ERROR",
@@ -127,26 +99,19 @@ router.get('/api/get', function(req, res) {
             }
             return res.json(err)
         }
-
         var jsonData = {
             status: "OK",
             record: data
         }
-
         return res.json(jsonData);
-
     })
-
 })
 
 //get id
 router.get('/api/get/:id', function(req, res) {
-
     var requestedId = req.param('id');
-
     // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model.findById
     Record.findById(requestedId, function(err, data) {
-
         // if err or no user found, respond with error 
         if (err || data == null) {
             var error = {
@@ -155,15 +120,12 @@ router.get('/api/get/:id', function(req, res) {
             };
             return res.json(error);
         }
-
         // otherwise respond with JSON data of the animal
         var jsonData = {
             status: 'OK',
             record: data
         }
-
         return res.json(jsonData);
-
     })
 })
 
@@ -173,12 +135,8 @@ router.get('/api/get/:id', function(req, res) {
  * @param  {String} req.param('id'). The animalId
  * @return {Object} JSON
  */
-
-
 router.get('/api/delete/:id', function(req, res) {
-
     var requestedId = req.param('id');
-
     // Mongoose method to remove, http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
     Record.findByIdAndRemove(requestedId, function(err, data) {
         if (err || data == null) {
@@ -188,19 +146,14 @@ router.get('/api/delete/:id', function(req, res) {
             };
             return res.json(error);
         }
-
         // otherwise, respond back with success
         var jsonData = {
             status: 'OK',
             message: 'Successfully deleted id ' + requestedId
         }
-
         res.json(jsonData);
-
     })
-
 })
-
 
 // /**
 //  * POST '/api/update/:id'
@@ -209,17 +162,12 @@ router.get('/api/delete/:id', function(req, res) {
 //  * @param  {Object} req. An object containing the different attributes of the Animal
 //  * @return {Object} JSON
 //  */
-
 router.post('/api/update/:id', function(req, res) {
-
     var requestedId = req.param('id');
-
     var dataToUpdate = {}; // a blank object of data to update
-
     // pull out the information from the req.body and add it to the object to update
     var til, context, bestPartDay, name, dateAdded;
-    var tags = []; // blank array to hold tags
-
+    var tags = []; // blank array to hold tags, not currently used
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
@@ -250,14 +198,13 @@ router.post('/api/update/:id', function(req, res) {
         dataToUpdate['name'] = name;
     }
 
-
-    //NEW
     if (req.body.dateAdded) {
         dateAdded = req.body.dateAdded;
         // add to object that holds updated data
         dataToUpdate['dateAdded'] = dateAdded;
     }
 
+    //no longer used
     // if(req.body.pageURL) {
     //   pageURL = req.body.pageURL;
     //   // add to object that holds updated data
@@ -277,7 +224,6 @@ router.post('/api/update/:id', function(req, res) {
             };
             return res.json(error);
         }
-
         console.log('Updated the record!');
         console.log(data);
 
@@ -286,39 +232,33 @@ router.post('/api/update/:id', function(req, res) {
             status: 'OK',
             record: data
         }
-
         return res.json(jsonData);
-
     })
-
 })
 
 // this route gets called whenever Twilio receives a message
 router.post('/twilio-callback', function(req, res) {
-
     // there's lots contained in the body
     console.log(req.body);
     // the actual message is contained in req.body.Body
     var incomingMsg = req.body.Body;
 
     //incoming messages look like:
-    //'format': 'Rain is wet, This morning it was gross outside, Having ice cream, tag1. tag2. tag3'
-
+    //'format': 'Rain is wet, This morning it was gross outside, Having ice cream'
 
     var msgArray = incomingMsg.split(',');
-    //msg Array --> [Rain is wet, This morning it was gross outside, Having ice cream, tag1.tag2.tag3]
+    //msg Array --> [Rain is wet, This morning it was gross outside, Having ice cream]
     var til = msgArray[0];
     var context = msgArray[1];
     var bestPartDay = msgArray[2];
-    // var tags = msgArray[3].split('.');
-
+    // var tags = msgArray[3].split('.'); //no longer used, was for splitting tags
 
     //now let's save to our database
     var recordObj = {
         til: til,
         context: context,
-        // tags: req.body.tags.split(','),
         bestPartDay: bestPartDay
+        // tags: req.body.tags.split(','),
         // tags: tags
         // pageURL: req.body.pageURL,
     }
@@ -330,20 +270,18 @@ router.post('/twilio-callback', function(req, res) {
         var twilioResp = new twilio.TwimlResponse();
         if (err) {
             // respond to user
-            twilioResp.sms('Oops! We couldn\'t save your lesson! --> ' + incomingMsg);
+            twilioResp.sms('There was an error this wasn\'t saved :( ' + incomingMsg);
             // respond to twilio
             res.set('Content-Type', 'text/xml');
             res.send(twilioResp.toString());
         } else {
             // respond to user
-            twilioResp.sms('Successfully saved your lesson! --> ' + incomingMsg);
+            twilioResp.sms('This note was saved :) NOW it\'s time for bed :) ' + incomingMsg);
             // respond to twilio
             res.set('Content-Type', 'text/xml');
             res.send(twilioResp.toString());
         }
     })
-
-
 })
 
 module.exports = router;
