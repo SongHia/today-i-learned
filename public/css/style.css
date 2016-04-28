@@ -102,7 +102,7 @@ li {
 }
 
 #giphy-display img{
-  width: 100%;
+  /*width: 100%;*/
 }
 .modal-header h4 {
     font-family: 'Cooper Hewitt', sans-serif;
