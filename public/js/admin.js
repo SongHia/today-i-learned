@@ -22,12 +22,12 @@ function loadAll() {
         var htmlToAdd = '<div id="admin-entry">' +
             '<h4><span class ="dateConverted displayDate">' + date.toDateString() + '</span></h4>' + //translated date
             '<h4><span class ="dateAdded displayDate">' + tilRecord[i].dateAdded + '</span></h4>' + //og date - needed to edit
+            '<p>ID: <span class="id">' + tilRecord[i]._id + '</span></p>' +
             '<p>Today I learned: <span class="til">' + tilRecord[i].til + '</span></p>' +
             '<p>Context: <span class="context">' + tilRecord[i].context + '</span></p>' +
             '<p>Best Parts Of The Day: <span class="bestPartDay">' + tilRecord[i].bestPartDay + '</span></p>' +
             '<p>Tags: <span class="tags">' + tilRecord[i].tags + '</span></p>' +
             '<p>Name: <span class="name">' + tilRecord[i].name + '</span></p>' +
-            '<p class="hide">ID: <span class="id">' + tilRecord[i]._id + '</span></p>' +
             '<button type="button" class="edit-button" id="' + tilRecord[i]._id + '" onclick="deleteRecord(event)">Delete Record</button>' +
             '<button type="button" class="edit-button" data-toggle="modal" data-target="#editModal"">Edit Record</button>' +
             '</div>';
