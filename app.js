@@ -8,9 +8,9 @@ var mongoose = require('mongoose');
 var AlchemyAPI = require('alchemy-api');
 var env = require('node-env-file');
 
-var cronJob = require('cron').CronJob; //new
-var twilio = require('twilio');
-var client = twilio('AC3b100488495968fcd38435cdaae0aecb', '31bf4a78153c1375eb4cacdc04ec3227');
+// var cronJob = require('cron').CronJob; //new
+// var twilio = require('twilio');
+// var client = twilio('AC3b100488495968fcd38435cdaae0aecb', '31bf4a78153c1375eb4cacdc04ec3227');
 
 var app = express();
 
@@ -73,13 +73,13 @@ app.use(function(err, req, res, next) {
 });
 
 //TEST
-var textJob = new cronJob( '33 17 * * *', function(){
-  // for( var i = 0; i < numbers.length; i++ ) {
-    client.sendMessage( { to: '8043064056', from:'3475865382', body:'Hello! Hope you’re having a good day.'}, function( err, data ) {
-      console.log( data.body );
-    // });
-  }
-},  null, true);
+// var textJob = new cronJob( '33 17 * * *', function(){
+//   // for( var i = 0; i < numbers.length; i++ ) {
+//     client.sendMessage( { to: '8043064056', from:'3475865382', body:'Hello! Hope you’re having a good day.'}, function( err, data ) {
+//       console.log( data.body );
+//     // });
+//   }
+// },  null, true);
 
 
 
