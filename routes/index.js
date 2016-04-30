@@ -280,7 +280,7 @@ router.post('/twilio-callback', function(req, res) {
         } else {
             // respond to user
             // twilioResp.sms('This note was saved :) NOW it\'s time for bed :) ' + incomingMsg);
-            twilioResp.sms('Thanks for the memory! NOW it\'s time to brush your teeth :)');
+            twilioResp.sms('Thanks for the memory! Now it\'s time to brush your teeth :)');
             // respond to twilio
             res.set('Content-Type', 'text/xml');
             res.send(twilioResp.toString());
