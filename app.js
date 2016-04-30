@@ -9,8 +9,8 @@ var AlchemyAPI = require('alchemy-api');
 var env = require('node-env-file');
 
 var cronJob = require('cron').CronJob; //new
-var twilio = require('twilio'),
-var client = twilio('ACCOUNTSID', 'AUTHTOKEN'),
+var twilio = require('twilio');
+var client = twilio('ACCOUNTSID', 'AUTHTOKEN');
 
 var app = express();
 
