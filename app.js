@@ -10,7 +10,7 @@ var env = require('node-env-file');
 
 var cronJob = require('cron').CronJob; //new
 var twilio = require('twilio');
-var client = twilio('ACCOUNTSID', 'AUTHTOKEN');
+var client = twilio('AC3b100488495968fcd38435cdaae0aecb', '31bf4a78153c1375eb4cacdc04ec3227');
 
 var app = express();
 
