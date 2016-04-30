@@ -68,5 +68,15 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//TEST
+var textJob = new cronJob( '33 17 * * *', function(){
+  // for( var i = 0; i < numbers.length; i++ ) {
+    client.sendMessage( { to: '8043064056', from:'3475865382', body:'Hello! Hope you’re having a good day.'}, function( err, data ) {
+      console.log( data.body );
+    // });
+  }
+},  null, true);
+
+
 
 module.exports = app;
