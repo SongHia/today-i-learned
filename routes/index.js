@@ -249,17 +249,18 @@ router.post('/twilio-callback', function(req, res) {
     //incoming messages look like:
     //'format': 'Rain is wet, This morning it was gross outside, Having ice cream'
 
-    var msgArray = incomingMsg.split(',');
+    var msgArray = incomingMsg.split('/');
     //msg Array --> [Rain is wet, This morning it was gross outside, Having ice cream]
     var til = msgArray[0];
-    var context = msgArray[1];
-    var bestPartDay = msgArray[2];
+    // var context = msgArray[1];
+    var bestPartDay = msgArray[1];
+
     // var tags = msgArray[3].split('.'); //no longer used, was for splitting tags
 
     //now let's save to our database
     var recordObj = {
         til: til,
-        context: context,
+        // context: context,
         bestPartDay: bestPartDay
         // tags: req.body.tags.split(','),
         // tags: tags

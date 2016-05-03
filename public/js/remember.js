@@ -34,7 +34,7 @@ function autoReload() {
     setInterval(function() {
         console.log("auto reload");
         loadEntry();
-    }, 8000);
+    }, 7000);
 }
 
 function loadEntry() {
